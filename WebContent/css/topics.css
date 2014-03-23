@@ -1,0 +1,29 @@
+#central_table th {
+	color: #FFF;
+	background-color: #7109AB;
+}
+
+#tb_topic{
+	width: 510px;
+}
+#tb_msg {
+	width: 100px;
+}
+#tb_last_msg {
+	width: 200px;
+}
+
+#central_table tr{
+	text-align: center;
+	background: rgba(0,0,0,.2);
+}
+
+.section_in_table a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+.section_in_table:hover {
+	background: rgba(0,0,0,.1);
+	height: 100%;
+}

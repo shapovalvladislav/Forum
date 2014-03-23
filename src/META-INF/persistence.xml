@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Forum">	
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<class>model.ForbiddenWord</class>
+		<class>model.Message</class>
+		<class>model.Profile</class>
+		<class>model.Role</class>
+		<class>model.Section</class>
+		<class>model.Topic</class>
+		<class>model.User</class>
+		<properties>
+		<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+		<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/Forum"/>
+		<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+		<property name="openjpa.ConnectionUserName" value="postgres"/>
+		<property name="openjpa.ConnectionPassword" value="624593"/>
+		</properties>
+	</persistence-unit>
+</persistence>

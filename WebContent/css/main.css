@@ -1,0 +1,172 @@
+*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+body{
+ background-image: url("../images/bg.png");
+ font: 14px Arial, Tahoma, sans-serif;
+}
+
+.b4radius{
+ 	border-radius: 4px;
+}
+
+#header_nav ul li a {
+	text-decoration: none;
+	color: #FFF;
+	padding: 0px 30px;
+	line-height: 30px;
+	display: block;
+}
+
+#header_nav ul li a:hover{
+	background: rgba(0,0,0,.2);
+}
+
+#page_align{
+	width: 1000px;
+	margin: 30px auto;
+	background-image: url("../images/bg.png");	
+	overflow: hidden;
+
+}
+.search_img{
+	float: right;
+	margin-top: 7px;
+	margin-right: 10px;
+}
+
+#header_title {
+	float: left;
+	margin: 10px;
+}
+
+#header_nav ul 
+{
+	list-style: none;
+}
+
+#header_nav ul li {
+	float: left;
+
+}
+
+input[name=header_search]{
+	float: right;
+	margin-right: 10px;
+	margin-top: 8px;
+	border: none;
+	box-shadow: inset 0px 1px 3px rgba(0,0,0,.5);
+}
+
+#header_nav {
+	border-top: solid 1px #FFF;
+	float: left;
+	height: 20px;
+	width: 1000px;
+}
+
+#header{
+	height: 170px;
+	background-color: #7109AB;
+}
+
+#sidebar{
+	width: 195px;
+	border-right: solid 3px rgba(0,0,0,0);
+	float: right;
+	background: url("../images/bg.png");
+	border-left: none;
+}
+
+#content{
+	width: 800px;
+	margin-top: 5px;
+	background: #a767d5;
+}
+
+.clr {
+	clear: both;
+}
+
+.top_login {
+	margin-top: 30px;
+	margin-right: 20px;
+	float: right;
+	width: 200px;
+	list-style: none;
+}
+
+.login_style {
+	border: none;
+	box-shadow: inset 0px 1px 3px rgba(0,0,0,.5);
+}
+
+.button{
+	margin-top: 10px;
+	background-color: #b165d5;
+	border: solid 1px #FFF;
+}
+.button:hover{
+	background-color: rgba(0,0,0,.01);
+}
+.button_login{
+	width: 70px;
+	float: left;
+
+}
+.button_reg{
+	width: 100px;
+	float: right;
+	margin-right: 20px;
+	height: 18px;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+}
+
+#side_section li a {
+	text-decoration: none;
+	line-height: 30px;
+	display: block;
+	border: solid 1px #FFF;
+	color: #FFF;
+}
+
+#side_section li a:hover{
+	background-color: #65016c;
+}
+
+#section {
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: left;
+	list-style: none;
+
+}
+#section a {
+	background-color: #7109AB;
+}
+#section ul li a{
+	background-color: #b165d5;
+}
+
+#sub_section{
+
+	text-align: center;
+	list-style: none;
+	background-image: url("../images/bg.png");
+
+}
+
+#sub_section li {
+	margin-top: 2px;
+}
+
+#footer{
+	margin-top: 20px;
+	height: 60px;
+	background-color: #7109AB;
+	width: 800px;
+}

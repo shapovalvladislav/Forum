@@ -1,0 +1,33 @@
+
+#registrationForm {
+	border: 10px double #FF988B;
+	background-color: #E8D4AF;
+	margin-top: 5px;
+	margin-left: 10%;
+	margin-right: 10%;
+	font-family: Verdana;
+	font-size: 14px;
+	color: #A916E8;
+}
+
+#formHeader {
+	text-align: center;
+}
+
+#registrationForm form {
+	margin-right: 5%;
+	margin-left: 5%;
+}
+
+#registrationForm label {
+	display: block;
+	float: left;
+	text-align: right;
+	width: 120px;
+	padding-right: 10px; 
+}
+
+#registrationForm ul li {
+	list-style: none;
+	padding-bottom: 10px;
+}

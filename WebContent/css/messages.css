@@ -1,0 +1,79 @@
+.message {
+	margin-top: 5px;
+	margin-left: 10px;
+	width: 96%;
+	background-color: #aa88ff;
+	border-style: ridge;
+	border-spacing: 4px;
+	border-color: #dd33ff;
+}
+
+.nick_name {
+	margin-top:  5px;
+	margin-left: 3px;
+	display: block;
+	font-weight: bold;
+}
+
+.nick_name a  {
+    text-decoration: none;
+	color: #ddddff;
+}
+
+.nick_name a:hover  {
+	background-color: rgba(0,0,0,.1);
+}
+
+.msg_icon {
+	padding: 5px;
+	float: left;
+	width: 100px;
+}
+
+.msg_date {
+	margin-left: 8px;
+	clear: left;
+}
+
+.msg_content {
+	margin-left: 20px;
+	margin-right: 10px;
+	text-align: justify;
+}
+
+.msg_del a {
+	text-decoration: none;
+	margin-bottom: 2px;
+	margin-right: 2px;
+}
+
+.topic_link {
+	float: left;
+	text-decoration: none;
+	margin-left: 1%;
+	display: block;
+	color: #000;
+}
+
+.topic_link:hover{
+	background-color: rgba(0,0,0,.1);
+}
+
+.topic_name {
+	margin-right: 80%;
+}
+
+.msg_send {
+	height: 140px;
+}
+
+.input_msg {
+	margin-left: 20px;
+	width: 80%;
+	height: 80px;
+	resize: none;
+}
+
+.btn_msg {
+
+}
