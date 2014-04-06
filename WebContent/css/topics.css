@@ -1,29 +1,29 @@
-#central_table th {
-	color: #FFF;
-	background-color: #7109AB;
-}
-
-#tb_topic{
-	width: 510px;
+#tb_topic {
+	width: 50%;
+	height: 50px;
 }
 #tb_msg {
-	width: 100px;
+	height: 50px;
+	width: 20%;
 }
 #tb_last_msg {
-	width: 200px;
+	height: 50px;
+	width: 30%;
 }
 
 #central_table tr{
 	text-align: center;
-	background: rgba(0,0,0,.2);
+	height: 50px;
 }
 
 .section_in_table a {
 	display: block;
 	text-decoration: none;
-	color: #000;
+
 }
-.section_in_table:hover {
-	background: rgba(0,0,0,.1);
-	height: 100%;
+
+
+#central_table tr td ul li a {
+	
 }
+

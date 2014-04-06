@@ -31,7 +31,7 @@ public class Topic implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="topicBean")
+	@OneToMany(mappedBy="topicBean", fetch=FetchType.EAGER)
 	private List<Message> messages;
 
 	//bi-directional many-to-one association to Profile

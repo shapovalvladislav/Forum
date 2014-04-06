@@ -5,213 +5,163 @@
 <head>
 	<title>Forum</title>
 	<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-		<link rel="stylesheet" type="text/css" href="css/registerForm.css">
-
-<script src="js/jquery-1.8.2.js"></script>
-<script src="js/jquery.ajaxfileupload.js"></script>
-<script language="Javascript">
-$(document).ready(function(){	
-	 $('#imageUpload').ajaxfileupload({
-	      'action': 'UploadServlet',	      	    
-	  'onComplete': function(response) {	        
-	        var str = "uploads/" + document.getElementById("imageUpload").value;
-	        document.getElementById("icon").src = str;
-	      },
-	 });
-});
-</script>
-
+	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/registerForm.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery.ajaxfileupload.js"></script>
+	<script language="javascript">
+	
+	
+	function checkIfEmpty(form) {
+		result = true;
+		
+		for (var i = 0; i < form.length; i++) {
+			form.elements[i].style.border = "none";
+			if (form.elements[i].type == "submit")
+				continue;
+			if (form.elements[i].value == null || form.elements[i].value == "") {
+				form.elements[i].style.border = "1px solid red";
+				result = false;
+			}
+		}
+		return result;
+	}
+	
+	function validateForm(form) {
+		var empty = checkIfEmpty(form);
+		return empty;
+	}
+	
+	
+	
+	$(document).ready(function(){	
+		 $('#imageUpload').ajaxfileupload({
+		      'action': 'UploadServlet',	      	    
+		  'onComplete': function(response) {	        
+		        var str = "DisplayImage?path=/var/tmp/uploads/" + document.getElementById("imageUpload").value;
+		        document.getElementById("icon").height = 128;
+		        document.getElementById("icon").width = 128;
+		        document.getElementById("icon").src = str;
+		  },
+		 });
+	});
+	</script>
+	
 </head>
 <body>
-<div id="page_align" class="b4radius">
-		<div id="header">
-			<div id="header_title">
-				<img src="images/header_title.png">
+<jsp:include page="header.jsp" />
+
+<jsp:include page="nav.jsp" />
+
+
+	<div class="row-fluid ">
+	<div class="span10 offset1 back_color b4radius" id="inputForm">
+	<div class="row-fluid ">
+	<div class="span2 offset5" id="title">
+	Форма регистрации
+	</div>
+	</div>	
+	<form class="form-horizontal" method="post"  onsubmit="return validateForm(this)" action="/Forum/RegisterServlet">
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="inputName">Имя</label>
+	    <div class="controls">
+	      <input type="text" id="inputName" name="fullName" placeholder="Имя">
+	    </div>
+	  </div>   
+	     
+	  <div class="control-group">
+	    <label class="control-label" for="inputNickname">Nickname</label>
+	    <div class="controls">
+	      <input type="text" id="inputNickname" name="nickName" placeholder="Nickname">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	  	<label class="control-label" for="inputLogin">Логин</label>
+	    <div class="controls">
+	      <input type="text" id="inputLogin" name="login" placeholder="Логин">
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	  	<label class="control-label" for="inputPassword">Пароль</label>
+	    <div class="controls">
+	      <input type="password" id="inputNickname" name="password" placeholder="Пароль">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	  	<label class="control-label" for="inputEmail">E-mail</label>
+	    <div class="controls">
+	      <input type="text" id="inputEmail" name="email" placeholder="Email">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		  <label class="control-label" id="inputDateLabel">Дата рождения</label>
+		  <div class="controls">
+		 
+			 <div class="form-inline">
+				
+				<script type="text/javascript">
+				document.write("<select id=\"day\" name=\"day\">");
+				for (var i=1; i<=31; i++)
+				{ 
+					document.write("<option value=\"" + i + "\">" + i + "</option>");
+				}
+				document.write("</select>");
+				document.write("<select id=\"month\" name=\"month\">");
+				var months=["Январь","Февраль","Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+				for (var i=0; i<months.length; i++)
+					document.write("<option value=\"" + i + "\">" + months[i] + "</option>");
+				document.write("</select>");
+				</script>
+				<input id="year" name="year" type="year">
 			</div>
-
-			<form method="" action="">
-				<ul type="list-style: none" class="top_login">
-					<li><input type="text" name="text_login"
-					placeholder="Логин" class="b4radius login_style"></li>
-					<br>
-					<li><input type="text" name="text_pass"
-					placeholder="Пароль" class="b4radius login_style">
-					</li>
-					<li>
-					<button id="btn_login" class="b4radius button_login button">Вход</button>
-					<a href="registerForm.html" id="btn_register" class="b4radius button button_reg">Регистрация</a>
-					</li>
-
-				</ul>
-			</form>
-
-
-			<div id="header_nav">
-				<ul>
-					<li><a href="index.html">ГЛАВНАЯ</a></li>
-					<li><a href="#">РАЗДЕЛЫ</a></li>
-					<li><a href="#">ТЕМЫ</a></li>
-					<li><a href="#">ТОП 10</a></li>
-					<li><a href="#">ПРОФИЛЬ</a></li>
-				</ul>
-			<form method="" action="">
-			<a href="#"><img src="images/search.png" width="20px" height="20px"
-			alt="Поиск по сайту" class="search_img"></a>
-			<input type="text" name="header_search" placeholder="Поиск.." class="b4radius">
-
-			 </form>
-			</div>
 		</div>
+	</div>
+	  
+	  <div class="control-group">
+	  	<label class="control-label" for="inputSex">Пол</label>
+	    <div class="controls">
+	      <select id="inputSex" name="sex">
+	      <option value="male">M</option>
+	      <option value="female">Ж</option>
+	  	  </select>
+	    </div>
+	  </div>
 
-		<div id="sidebar" >
-			<ul id="side_section">
-				<li id="section"><a href="topics.html">ТОП 10</a>
-					<ul id="sub_section">
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-						<li><a href="#">test</a>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<div id="content" class="b4radius">
-			 <div id="registrationForm">
- <form action="RegisterServlet" method="post">
- <h1 id="formHeader">Форма регистрации</h1>
- <br>
- <ul>
- <li>
- <label for="name">Имя</label>
- <input id="name" name="name" type="text">
- </li>
- <li>
- <label for="nickname">Nickname</label>
- <input id="nickname" name="nickname" type="text">
- </li>
- <li>
- <label for="login">Логин</label>
- <input id="login" name="login" ="login" type="text">
- </li>
- <li>
- <label for="password">Пароль</label>
- <input name="password" type="password">
- </li>
- <li>
- <label for="email">E-mail</label>
- <input id="email" name="email" type="text">
- </li>
+	  <label class="control-label" id="inputAboutLabel" for="inputAbout">О себе</label>
+	  <textarea id="inputAbout" class="form-control" name="about" rows="3"></textarea>
 
-<li>
-<h4>Дата рождения</h4>
+	  	<div class="control-group">
+	  	<label class="control-label" for="inputImage">Фото</label>
+	    <div class="controls">
+	    	<img id="icon" />
+	    	<input type="file" id="imageUpload" name="datafile"> 
+	    </div>
+	  </div>
 
-<div id="dayDiv" style="display:inline-block;">
-<p>Число</p>
-<select id="day" name="day">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-<option value="15">15</option>
-<option value="16">16</option>
-<option value="17">17</option>
-<option value="18">18</option>
-<option value="19">19</option>
-<option value="20">20</option>
-<option value="21">21</option>
-<option value="22">22</option>
-<option value="23">23</option>
-<option value="24">24</option>
-<option value="25">25</option>
-<option value="26">26</option>
-<option value="27">27</option>
-<option value="28">28</option>
-<option value="29">29</option>
-<option value="30">30</option>
-<option value="31">31</option>
-</select>
-</div>
+	  	<div class="control-group">
+	    <div class="controls">
+	    	<button type="submit" class="btn btn-success">Зарегистрироваться</button>
+	    </div>
+	  </div>
+	  
+	</form>
 
-<div id="monthDiv" style="display:inline-block;">
-<p>Месяц</p>
-<select id="month" name="month">
-<option value="1">Январь</option>
-<option value="2">Февраль</option>
-<option value="3">Март</option>
-<option value="4">Апрель</option>
-<option value="5">Май</option>
-<option value="6">Июнь</option>
-<option value="7">Июль</option>
-<option value="8">Август</option>
-<option value="9">Сентябрь</option>
-<option value="10">Октябрь</option>
-<option value="11">Ноябрь</option>
-<option value="12">Декабрь</option>
-</select>
-</div>
+	</div>
+	</div>
 
-<div id="yearDiv" style="display:inline-block;">
-<p>Год</p>
-<input id="year" type="year">
-</select>
-</div>
+	<jsp:include page="footer.jsp" />
 
-</li>
-<li>
-<p>Пол</p>
-<select name="sex">
-<option value="1">Мужской</option>
-<option value="2">Женский</option>
-</select>
-</li>
-<li>
-<p>О себе</p>
-<p><textarea rows="10" cols="45" name="about"></textarea></p>
-</li>
-<li>
-<img id="icon">
-<form>
-    <input id="imageUpload" type="file" name="datafile" />
-</form>
-</li>
-<br>
-<li>
-<input type="submit" value="Зарегистрироваться">
-</li>
-</ul>
-
- </form>
- </div>
-		</div>
-
-		<div id="footer" class="b4radius">
-			
-		</div>
-		
-		<div class="clr"></div>
-</div>
-
-
-
-</body>
-</html>
-
-
+	<div class="clr"></div>
+	
+	</div>
+	</body>
+	</html>

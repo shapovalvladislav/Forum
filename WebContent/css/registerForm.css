@@ -1,33 +1,39 @@
-
-#registrationForm {
-	border: 10px double #FF988B;
-	background-color: #E8D4AF;
-	margin-top: 5px;
-	margin-left: 10%;
-	margin-right: 10%;
-	font-family: Verdana;
-	font-size: 14px;
-	color: #A916E8;
+#day {
+	width: 50px;
 }
 
-#formHeader {
-	text-align: center;
+#month {
+	width: 170px;
 }
 
-#registrationForm form {
-	margin-right: 5%;
-	margin-left: 5%;
+#year {
+	width: 150px;
 }
 
-#registrationForm label {
-	display: block;
-	float: left;
-	text-align: right;
-	width: 120px;
-	padding-right: 10px; 
+#inputDateLabel
+ {
+	margin-right: 20px;
 }
 
-#registrationForm ul li {
-	list-style: none;
-	padding-bottom: 10px;
+#inputAboutLabel {
+	margin-right: 20px;
 }
+#inputAbout {
+	resize: none;
+	width: 370px;
+	height: 100px;
+}
+
+#inputForm {
+	background: #F5F5F5;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+
+#title {
+	font-size: 20pt;
+	margin-bottom: 25px;
+	width: 50%;
+}
+

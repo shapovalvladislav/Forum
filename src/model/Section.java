@@ -26,12 +26,12 @@ public class Section implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Profile
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="moderator")
 	private Profile profile;
 
 	//bi-directional many-to-one association to Topic
-	@OneToMany(mappedBy="sectionBean")
+	@OneToMany(mappedBy="sectionBean", fetch=FetchType.EAGER)
 	private List<Topic> topics;
 
 	public Section() {
