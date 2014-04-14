@@ -52,13 +52,10 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	        if (isMultipart) {
-	        	
 	        	// Create a factory for disk-based file items
 	        	FileItemFactory factory = new DiskFileItemFactory();
-
 	        	// Create a new file upload handler
 	        	ServletFileUpload upload = new ServletFileUpload(factory);
-	 
 	            try {
 	            	// Parse the request
 					List<FileItem> items = upload.parseRequest(request);
@@ -77,19 +74,13 @@ public class UploadServlet extends HttpServlet {
 	                        	System.out.println("Path doesn't exist");
 	                        	boolean status = path.mkdirs();
 	                        }
-	 
 	                        File uploadedFile = new File(path + "/" + fileName);
 	                        System.out.println(uploadedFile.getAbsolutePath());
 	                        item.write(uploadedFile);
 	                        BufferedImage img = ImageIO.read(uploadedFile);
-	                        
 	                        BufferedImage scaledImg = Scalr.resize(img, Mode.FIT_EXACT, 128, 128);
-	                          
 	                        String ext = FilenameUtils.getExtension(uploadedFile.getCanonicalPath());
-	                        System.out.println(ext);
 	                        ImageIO.write(scaledImg, ext, uploadedFile);
-	                            
-	                        System.out.println("Done resizing");
 	                    }
 	                }
 	            } catch (FileUploadException e) {

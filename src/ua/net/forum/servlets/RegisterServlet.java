@@ -6,22 +6,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Profile;
+import model.User;
 import ua.net.forum.db.DBQuery;
 import ua.net.forum.db.HashPassword;
-import model.Profile;
-import model.Role;
-import model.User;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -55,7 +49,6 @@ public class RegisterServlet extends HttpServlet {
 		Integer day = Integer.parseInt((String) request.getParameter("day"));
 		Integer month = Integer.parseInt((String) request.getParameter("month"));
 		Integer year = Integer.parseInt((String) request.getParameter("year"));
-		String birth = year + "/" + month + "/" + day; 
 		Date birthDate = new Date(year, month, day);
 		String sex = (String) request.getParameter("sex");
 		String about = (String) request.getParameter("about");
@@ -91,7 +84,4 @@ public class RegisterServlet extends HttpServlet {
 		String nextJSP = "/index.jsp";
 		response.sendRedirect(nextJSP);
 	}
-	
-
-
 }

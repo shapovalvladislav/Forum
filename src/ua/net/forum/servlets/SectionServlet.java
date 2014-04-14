@@ -2,7 +2,6 @@ package ua.net.forum.servlets;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.net.forum.db.DBQuery;
-import ua.net.forum.view.SectionForView;
 import model.Message;
 import model.Section;
 import model.Topic;
+import ua.net.forum.db.DBQuery;
+import ua.net.forum.view.SectionForView;
 
 /**
  * Servlet implementation class SectionServlet
@@ -65,7 +64,6 @@ public class SectionServlet extends HttpServlet {
 			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgUserName, lastMsgUserId);
 			sectionsForView.add(sectionForView);
 		}
-		
 		request.setAttribute("sections", sectionsForView);
 	}
 
@@ -73,7 +71,6 @@ public class SectionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

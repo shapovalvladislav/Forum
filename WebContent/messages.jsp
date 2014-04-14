@@ -7,6 +7,11 @@
 <%@page import="java.io.*" %>
 <%@page import="java.util.Collection" %>
 
+<link rel="stylesheet" href="css/tinyeditor.css">
+<script src="js/tiny.editor.packed.js"></script>
+
+<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}?${pageContext.request.queryString }"/> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,24 +74,47 @@
 				<div class="nick_name">
 					<a href="#">${sessionScope.loggedProfile.nickName }</a>
 				</div>
-				<div  class="msg_icon">
+	  			<div  class="msg_icon">
 					<img src="/Forum/DisplayIcon?id=${sessionScope.loggedProfile.id }">
-				</div>
+				</div> 
 				<div class="msg_send_content" >
-					<form method="post" action="AddMessageServlet">
-						<textarea class="input_msg" name="content"></textarea>
-				</div>
-
-			  	<div class="control-group">
-			    <div class="controls">
-			    	<button type="submit" class="btn btn-success">Отправить</button>
-			    </div>
-			  	</div>
+					<form onsubmit="window.editor.post()" method="post" action="/Forum/AddMessageServlet">
+				<textarea  name="msgContent"  id="tinyeditor" style="width: 100%; height: 200px"></textarea>
+				<script>
+				window.editor = new TINY.editor.edit('editor', {
+					id: 'tinyeditor',
+					width: '100%',
+					height: 175,
+					cssclass: 'tinyeditor',
+					controlclass: 'tinyeditor-control',
+					rowclass: 'tinyeditor-header',
+					dividerclass: 'tinyeditor-divider',
+					controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+						'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+						'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+						'font', 'size', 'style', '|', 'image', 'hr', 'link', 'unlink', '|', 'print'],
+					footer: false,
+					fonts: ['Verdana','Arial','Georgia','Trebuchet MS'],
+					xhtml: true,
+					cssfile: 'custom.css',
+					bodyid: 'editor',
+					footerclass: 'tinyeditor-footer',
+					resize: {cssclass: 'resize'}
+				});
+				</script>
 			
+						<input type="hidden" name="topic" value="${param.id }" />
+						<div class="control-group">
+					    <div class="controls">
+					    	<button type="submit" class="btn btn-success">Отправить</button>
+					    </div>
+					  	</div>
+					</form>
+				</div>
+				
 				</div>
 				</c:if>
 
-		
 		</div>
 		
 		</div>
@@ -96,6 +124,8 @@
 		<jsp:include page="footer.jsp" />
 
 		<div class="clr"></div>
+
+					
 </div>
 </body>
 </html>

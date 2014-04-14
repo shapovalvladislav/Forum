@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -22,77 +21,21 @@ import model.Section;
 import model.Topic;
 import model.User;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-
 
 public class DBQuery {
 	
 	private static final String SELECT_ROLE_BY_NAME = "SELECT r FROM Role r WHERE r.name=:name";
 	private static final String SELECT_SECTION = "SELECT x FROM Section x";
 	private static final String SELECT_TOPIC_BY_SECTION = "SELECT t FROM Topic t WHERE t.sectionBean.id=";
-	private static final String SELECT_MESSAGES_BY_TOPIC = "SELECT x FROM Message x WHERE x.topicBean.id=";
+	private static final String SELECT_MESSAGES_BY_TOPIC = "SELECT x FROM Message x WHERE x.topicBean.id=:topic ORDER BY x.date";
 	private static final String SELECT_TOP_USERS = "SELECT p FROM Profile p ORDER BY p.msgCount DESC";
 	private static final String SELECT_USER_BY_LOGIN = "SELECT u FROM User u WHERE u.login=:login";
 	private static final String SELECT_USER_BY_LOGIN_AND_PASSWORD = "SELECT x FROM User x WHERE x.login=:login AND x.password=:password";
-	private static final String SELECT_MESSAGE = "SELECT x FROM Message x";
-	
 	
 	private static Logger log = LogManager.getLogger(DBQuery.class.getName());
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Forum");
-	
-	public static void generateSection() {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		try {
-			Profile profile = new Profile();
-			profile.setFullName("FullnameNG");
-			profile.setNickName("Nickname NG");
-			profile.setSex("M");
-			profile.setBirthDate(new Date());
-			profile.setEmail("qq@mail.ru");
-			
-			
-			Section section = new Section();
-			section.setName("SectionForTestNG");
-			section.setDescription("Description");
-			section.setProfile(profile);
-			
-			em.persist(section);
-			
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			log.error(e);
-			em.getTransaction().rollback();
-		}
-		finally {
-			em.close();
-		}
-		
-	}
-	
-	public static Section testSection(String name) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Section section = null;
-		try {
-			Query query = em.createQuery("SELECT s FROM Section s WHERE s.name=:name").setMaxResults(1);
-			query.setParameter("name", name);
-			section = (Section) query.getResultList().get(0);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			log.error(e);
-			em.getTransaction().rollback();
-		} finally {
-			em.close();
-		}
-		return section;
-	}
-	
-	
-	
 	
 	public static boolean userExists(String login, String password) {
 		EntityManager em = emf.createEntityManager();
@@ -102,6 +45,25 @@ public class DBQuery {
 			Query query = em.createQuery(SELECT_USER_BY_LOGIN_AND_PASSWORD);
 			query.setParameter("login", login);
 			query.setParameter("password", password);
+			if (query.getResultList().size() == 1)
+				result = true;
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
+	
+	public static boolean loginExists(String login) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		boolean result = false;
+		try {
+			Query query = em.createQuery(SELECT_USER_BY_LOGIN);
+			query.setParameter("login", login);
 			if (query.getResultList().size() == 1)
 				result = true;
 			em.getTransaction().commit();
@@ -173,7 +135,8 @@ public class DBQuery {
 		em.getTransaction().begin();
 		List<?> list = null;
 		try {
-			Query query = em.createQuery(SELECT_MESSAGES_BY_TOPIC + topic);
+			Query query = em.createQuery(SELECT_MESSAGES_BY_TOPIC);
+			query.setParameter("topic", Integer.parseInt(topic));
 			list = query.getResultList();
 			em.getTransaction().commit();
 		} catch (Exception e) {
@@ -281,7 +244,6 @@ public class DBQuery {
 		}
 	}
 	
-	
 	public static void registerUser(User u) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -297,6 +259,29 @@ public class DBQuery {
 		}
 	}
 	
+	
+	public static void addMessage(int topicId, String content, Profile profile) {
+		Message msg = new Message();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		try {
+			Query query = em.createQuery("SELECT t FROM Topic t WHERE t.id=:id").setMaxResults(1);
+			query.setParameter("id", topicId);
+			Topic topic = (Topic) query.getResultList().get(0);
+			msg.setTopicBean(topic);
+			msg.setProfile(profile);
+			msg.setContent(content);
+			msg.setDate(new Timestamp(new Date().getTime()));
+			em.persist(msg);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		finally {
+			em.close();
+		}
+	}
 	
 	
 }

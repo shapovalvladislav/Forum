@@ -1,10 +1,6 @@
 package ua.net.forum.view;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-
-import ua.net.forum.db.DBQuery;
-import model.Section;
 
 public class SectionForView {
 	private int id;
@@ -81,7 +77,4 @@ public class SectionForView {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
-	
-	
 }

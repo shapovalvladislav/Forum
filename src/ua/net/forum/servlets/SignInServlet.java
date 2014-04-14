@@ -1,9 +1,6 @@
 package ua.net.forum.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,14 +24,12 @@ public class SignInServlet extends HttpServlet {
      */
     public SignInServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -52,8 +47,6 @@ public class SignInServlet extends HttpServlet {
 		} else {
 			request.getRequestDispatcher("/signInError.jsp").forward(request, response);
 		}
-		
-      
 	}
 
 }

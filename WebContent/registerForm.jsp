@@ -8,45 +8,91 @@
 	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/registerForm.css" rel="stylesheet">
+	
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	
-	<script src="js/jquery-1.8.2.js"></script>
-	<script src="js/jquery.ajaxfileupload.js"></script>
-	<script language="javascript">
+
+	<script type="text/javascript" src="js/jquery.ajaxfileupload.js"></script>
 	
 	
-	function checkIfEmpty(form) {
-		result = true;
-		
-		for (var i = 0; i < form.length; i++) {
-			form.elements[i].style.border = "none";
-			if (form.elements[i].type == "submit")
-				continue;
-			if (form.elements[i].value == null || form.elements[i].value == "") {
-				form.elements[i].style.border = "1px solid red";
-				result = false;
-			}
-		}
-		return result;
-	}
+	<script type="text/javascript">
+
+
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#registerForm").validate({
+                rules: {
+                	fullName: "required",
+                	nickName: "required",
+                    login: {
+                    	required: true,
+                    	remote: "/Forum/UserExistsServlet"
+                    },
+                    password: "required",
+                    year: "required",
+                    datafile: {
+                    	accept: "png|jpe?g|gif"
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                	fullName: "Введите имя",
+                	nickName: "Введите nickname",
+                    login: {
+                    	required: "Введите логин",
+                    	remote: "Пользователь с таким логином уже существует"
+                    },
+                    password: "Введите пароль",
+                    year: "Введите год рождения",
+                    datafile: {
+                   		accept: "Расширение должно быть: png | jpe?g | gif"
+                    },
+                    email: {
+                        required: "Введите электронную почту",
+                        email: "Введите корректный e-mail адрес"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+</script>
 	
-	function validateForm(form) {
-		var empty = checkIfEmpty(form);
-		return empty;
-	}
-	
-	
-	
+	<script type="text/javascript">
+
 	$(document).ready(function(){	
 		 $('#imageUpload').ajaxfileupload({
 		      'action': 'UploadServlet',	      	    
 		  'onComplete': function(response) {	        
-		        var str = "DisplayImage?path=/var/tmp/uploads/" + document.getElementById("imageUpload").value;
+				var str = "DisplayImage?path=/var/tmp/uploads/" + document.getElementById("imageUpload").value;
 		        document.getElementById("icon").height = 128;
 		        document.getElementById("icon").width = 128;
 		        document.getElementById("icon").src = str;
-		  },
+		  }
 		 });
 	});
 	</script>
@@ -65,7 +111,7 @@
 	Форма регистрации
 	</div>
 	</div>	
-	<form class="form-horizontal" method="post"  onsubmit="return validateForm(this)" action="/Forum/RegisterServlet">
+	<form class="form-horizontal" id="registerForm" method="post" action="/Forum/RegisterServlet">
 	  
 	  <div class="control-group">
 	    <label class="control-label" for="inputName">Имя</label>

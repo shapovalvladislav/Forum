@@ -33,7 +33,7 @@
 				</c:when>
 				<c:otherwise>
 				
-				<div style="background-color: white;" class="span2 offset5" id="logged">
+				<div class="span2 offset5" id="logged">
 					<div id="icon"></div>
 					<div>
 					Вы вошли как: ${sessionScope.loggedProfile.nickName }

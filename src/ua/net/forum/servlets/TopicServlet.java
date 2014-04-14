@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Message;
-import model.Section;
 import model.Topic;
 import ua.net.forum.db.DBQuery;
-import ua.net.forum.view.SectionForView;
 import ua.net.forum.view.TopicForView;
 
 /**
@@ -31,7 +29,6 @@ public class TopicServlet extends HttpServlet {
      */
     public TopicServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -48,7 +45,6 @@ public class TopicServlet extends HttpServlet {
 			Timestamp lastMsgDate = null;
 			String lastMsgUserName = null;
 			int lastMsgUserId = 0;
-
 			for (Message msg : topic.getMessages()) {
 				Timestamp curMsgDate = msg.getDate();
 				if (lastMsgDate == null || curMsgDate.after(lastMsgDate)) {
@@ -61,7 +57,6 @@ public class TopicServlet extends HttpServlet {
 			TopicForView topicForView = new TopicForView(id, name, msgCount, lastMsgDate, lastMsgUserName, lastMsgUserId);
 			topicsForView.add(topicForView);
 		}
-		
 		request.setAttribute("topics", topicsForView);
 	}
 
@@ -69,7 +64,6 @@ public class TopicServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
