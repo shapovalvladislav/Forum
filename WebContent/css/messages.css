@@ -1,82 +1,84 @@
 #content {
-	height: auto;	
+	width: 950px;
+	background-color: #F5F5F5;
+	margin-top: 10px;
+	padding-left: 50px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+#topic {
+	font-size: 20px;
+	float: left;
+}
+
+#author {
+	font-size: 20px;
+	float: right;
+	margin-right: 50px;
+}
+
+.line {
+	border: none;
+	height: 1px;
+	color: #8470FF;
+	background-color: #8470FF;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: -25px;
+	width: 950px;
+}
+
+.user_icon {
+	width: 128px;
+	height: 128px;
+	margin-left: 20px;
+	border: solid 1px #8470FF;
+}
+
+.fleft {
+	float: left;
+}
+
+.msg_content {
+	width: 750px;
+	text-align: justify;
+	margin-left: 20px;
+	margin-bottom: 10px;
 }
 
 .message {
-	margin-top: 5px;
-	margin-left: 10px;
-	width: 96%;
-	background-color: #F5F5F5;
-	border-style: ridge;
-	border-spacing: 4px;
+	padding-top: 10px;
+	margin-top: 10px;
+	margin-left: -25px;
+	border: solid 1px #8470FF;
+	width: 950px;
 }
 
-.nick_name {
-	margin-top:  5px;
-	margin-left: 3px;
-	display: block;
-	font-weight: bold;
-}
-
-.nick_name a  {
-    text-decoration: none;
-	color: black;
-}
-.nick_name a:hover  {
-	background-color: rgba(0,0,0,.1);
-}
-
-.msg_icon {
-	padding: 5px;
-	width: 128px;
-	height: 128px;
-}
-
-.msg_date {
-	margin-left: 8px;
-	clear: left;
-}
-
-
-.msg_content {
-	margin-left: 20px;
-	margin-right: 10px;
-	text-align: justify;
-}
-
-.msg_del a {
+.nick {
 	text-decoration: none;
-	margin-bottom: 2px;
-	margin-right: 2px;
-}
-
-.topic_link {
-	float: left;
-	text-decoration: none;
-	margin-left: 1%;
-	display: block;
 	color: #000;
-}
-
-.topic_link:hover{
-	background-color: rgba(0,0,0,.1);
-}
-
-.topic_name {
-	margin-right: 80%;
-}
-
-.msg_send {
-	height: auto;
-}
-
-.input_msg {
 	margin-left: 20px;
-	width: 80%;
-	height: auto;
-	resize: none;
+	margin-top: 5px;
 }
 
-.btn_msg {
+.ml_20 {
+	margin-left: 20px;
+}
 
+
+.new_msg_content {
+	width: 750px;
+	text-align: justify;
+	resize: none;
+	height: 100px;
+	float: left;
+}
+
+.btn_send {
+	float: right;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: -6px;
 }

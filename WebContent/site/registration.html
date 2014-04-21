@@ -14,71 +14,71 @@
 	
 	<script type="text/javascript">
 
+
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#registerForm").validate({
+                rules: {
+                	fullName: "required",
+                	nickName: "required",
+                    login: {
+                    	required: true,
+                    	remote: "/Forum/UserExistsServlet"
+                    },
+                    password: "required",
+                    year: "required",
+                    datafile: {
+                    	accept: "png|jpe?g|gif"
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                	fullName: "Введите имя",
+                	nickName: "Введите nickname",
+                    login: {
+                    	required: "Введите логин",
+                    	remote: "Пользователь с таким логином уже существует"
+                    },
+                    password: "Введите пароль",
+                    year: "Введите год рождения",
+                    datafile: {
+                   		accept: "Расширение должно быть: png | jpe?g | gif"
+                    },
+                    email: {
+                        required: "Введите электронную почту",
+                        email: "Введите корректный e-mail адрес"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+</script>
 	
-	(function($,W,D)
-	{
-	    var JQUERY4U = {};
-	
-	    JQUERY4U.UTIL =
-	    {
-	        setupFormValidation: function()
-	        {
-	            //form validation rules
-	            $("#registerForm").validate({
-	                rules: {
-	                	fullName: "required",
-	                	nickName: "required",
-	                    login: {
-	                    	required: true,
-	                    	remote: "/Forum/UserExistsServlet"
-	                    },
-	                    password: "required",
-	                    year: "required",
-	                    datafile: {
-	                    	accept: "png|jpe?g|gif"
-	                    },
-	                    email: {
-	                        required: true,
-	                        email: true
-	                    }
-	                },
-	                messages: {
-	                	fullName: "Введите имя",
-	                	nickName: "Введите nickname",
-	                    login: {
-	                    	required: "Введите логин",
-	                    	remote: "Пользователь с таким логином уже существует"
-	                    },
-	                    password: "Введите пароль",
-	                    year: "Введите год рождения",
-	                    datafile: {
-	                   		accept: "Расширение должно быть: png | jpe?g | gif"
-	                    },
-	                    email: {
-	                        required: "Введите электронную почту",
-	                        email: "Введите корректный e-mail адрес"
-	                    }
-	                },
-	                submitHandler: function(form) {
-	                    form.submit();
-	                }
-	            });
-	        }
-	    }
-	
-	    //when the dom has loaded setup form validation rules
-	    $(D).ready(function($) {
-	        JQUERY4U.UTIL.setupFormValidation();
-	    });
-	
-	})(jQuery, window, document);
-	</script>
-		
 	<script type="text/javascript">
 
 	$(document).ready(function(){	
 		 $('#imageUpload').ajaxfileupload({
-		      'action': '/Forum/UploadServlet',	      	    
+		      'action': 'UploadServlet',	      	    
 		  'onComplete': function(response) {	        
 				var str = "DisplayImage?path=/var/tmp/uploads/" + document.getElementById("imageUpload").value;
 		        document.getElementById("icon").height = 128;
@@ -88,12 +88,12 @@
 		 });
 	});
 	</script>
-	<script type="text/javascript">
+		<script type="text/javascript">
       		function showLogin(state) {
       	  		document.getElementById('login_window').style.display = state;      
           		document.getElementById('wrap').style.display = state;	
       		}
-  	</script>
+  		</script>
 	</head>
 
 	
@@ -110,7 +110,7 @@
 
 <div id="content" class="b5radius">
 	<p id="reg_title">РЕГИСТРАЦИЯ</p>
-	<form id="registerForm" method="post" action="/Forum/RegisterServlet">
+	<form method="post" action="/Forum/RegisterServlet">
 	    
 
 		<div id="reg_div_image">
@@ -129,6 +129,9 @@
 	    <div>
 	    	<input type="text" class="inputs"  id="inputLogin" name="login" placeholder="Логин">
 	    </div>
+
+	  
+
 
 	    <div>
 	      	<input type="password" class="inputs"  id="inputNickname" name="password" placeholder="Пароль">

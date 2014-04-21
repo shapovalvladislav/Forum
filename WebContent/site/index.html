@@ -9,6 +9,12 @@
 		<meta charset="utf-8">
 		<link href="css/style.css" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
+		<script type="text/javascript">
+      		function showLogin(state) {
+      	  		document.getElementById('login_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
+  		</script>
 	</head>
 
 	
@@ -21,10 +27,11 @@
 
 <div id="main">
 
+<jsp:include page="header.jsp" />
 
-	<jsp:include page="header.jsp" />
+<jsp:include page="nav.jsp" />
 
-	<jsp:include page="nav.jsp" />
+
 
 
 	<div style="clear: both"></div>
@@ -36,7 +43,7 @@
 			<th id="tb_msg">Сообщения</th>
 			<th id="tb_last_msg">Последнее сообщение</th>
 				
-				<jsp:include page="/SectionServlet"></jsp:include>
+				<jsp:include page="SectionServlet"></jsp:include>
 
 				<c:forEach var="section" items="${sections}">
 			

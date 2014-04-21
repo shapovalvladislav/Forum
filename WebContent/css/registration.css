@@ -1,0 +1,56 @@
+#content {
+	width: 950px;
+	background-color: #F5F5F5;
+	margin-top: 10px;
+	padding-left: 50px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+#reg_title {
+	text-align: center;
+	font-size: 30px;
+}
+
+.inputs {
+	width: 200px;
+	height: 20px;
+	margin-top: 15px;	
+}
+
+#p_birth {
+	margin-top: 10px;
+	margin-bottom: 5px;	
+}
+#inputAbout {
+	margin-top: 10px;
+	width: 200px;
+	resize: none;
+	height: 100px;
+}
+
+#year {
+	width: 66px;
+}
+
+#bt_reg {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#icon {
+	width: 128px;
+	height: 128px;
+}
+
+#reg_div_image {
+	float: right;
+}
+
+#reg_img {
+	height: 500px;
+	width: 500px;
+	margin-right: 130px;
+	margin-top: 20px;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Форум - Профиль</title>
+		<meta charset="utf-8">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/profile_user.css" rel="stylesheet">
+		<script type="text/javascript">
+      		function showLogin(state) {
+      	  		document.getElementById('login_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
+  		</script>
+	</head>
+
+	
+
+<body>
+
+
+<div id="main">
+
+	<div id="header" class="b5radius">
+		<img id="header_title" src="images/header_title.png">
+
+		<div id="header_user" class="visible">
+
+			<img src="images/default_icon.png">
+			<p>Вы вошли как:</p>
+			<p>NickName</p>
+			<form>
+				<input type="submit" name="logout" value="Выйти">
+			</form>
+		</div>
+
+		<div class="head_btn b5radius invisible">
+			<a class="text16" href="#">Регистрация</a>
+		</div>
+		<div class="head_btn b5radius invisible" onclick="showLogin('block')">
+			<p class="text16" href="#">Вход</p>
+		</div>
+
+	</div> <!-- header -->
+
+	<div id="nav_bar" class="b5radius">
+		<ul class="nav_text" id="nav">
+			<li><a href="index.html">Главная</a></li>
+			<li><a href="top.html">ТОП 10</a></li>
+			<li><a href="profile.html">Профиль</a></li>
+		</ul>
+		<div id="search">
+			<form>
+				<img src="images/search.png">
+				<input type="text" name="search" placeholder="Поиск..">
+			</form>
+		</div>
+	</div>
+
+
+	<div style="clear: both"></div>
+
+<div id="content" class="b5radius">
+	<p id="user_title">Пользователь - Test</p>
+	
+	<img id="user_icon" src="images/default_icon.png">
+
+	<div class="user_info">
+		<p>NickName: Test</p>
+	</div>
+
+	<div class="user_info">
+		<p>Имя: Test</p>
+	</div>
+
+	<div class="user_info">
+		<p>E-Mail: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Дата рождения: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Пол: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Количество сообщений: Test</p>
+	</div>
+
+
+	<form action="" class="invisible">
+		<input type="submit" value="Удалить пользователя">
+	</form>
+
+
+</div> <!--content-->
+
+	<div id="footer" class="b5radius">
+		
+	</div> <!--footer-->
+
+
+	<div id="wrap">
+		<div id="login_window"> 
+		<form action="post">
+    		<img onclick="showLogin('none')" id="close_img" src="images/close.png">
+    		<p>
+    			Вход
+    		</p>
+    		<div style="clear: both"></div>
+    		<input type="text" placeholder="Логин" name="login" class="login_input">
+    		<input type="password" placeholder="********" name="password" class="login_input">
+    		<input type="submit" value="Войти" id="login_btn" class="text16 b5radius">
+			<div style="clear: both"></div>
+		</form>
+		</div>
+ 	</div>
+
+</div> <!--maint -->
+
+</body>
+
+</html>

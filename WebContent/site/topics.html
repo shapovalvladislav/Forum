@@ -1,55 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Форум - Главная</title>
+		<title>Форум - Темы</title>
 		<meta charset="utf-8">
 		<link href="css/style.css" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
 	</head>
-
-	
-
 <body>
 
 
-
-	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}" />
-
-<div id="main">
-
-
+	<div id="main">
 	<jsp:include page="header.jsp" />
-
 	<jsp:include page="nav.jsp" />
+	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}?${pageContext.request.queryString }"/>  
+	<jsp:include page="/TopicServlet" />
 
 
 	<div style="clear: both"></div>
 
 	<div id="content">
 		<table border="1px" id="central_table" class="b5radius">
-			<th id="tb_section">Раздел</th>
-			<th id="tb_topic">Темы</th>
+			<th id="tb_section">Тема</th>
 			<th id="tb_msg">Сообщения</th>
 			<th id="tb_last_msg">Последнее сообщение</th>
 				
-				<jsp:include page="/SectionServlet"></jsp:include>
+				<c:forEach var="topic" items="${topics }">
+				
 
-				<c:forEach var="section" items="${sections}">
-			
+				
+				
+				
+				
 				<tr>
 					<td class="section_in_table">
-						<a href="topics.jsp?id=${section.id }">${ section.name }</a>
+						<a href="messages.jsp?id=${topic.id }">${topic.name }</a>
 					</td>
-					<td>${section.topicCount }</td>
-					<td>${section.msgCount }</td>
+					<td>${topic.msgCount }</td>
 					<td>
 						<ul style="list-style: none">
-							<li id="last_msg_date">${ section.lastMsgDate }</li>
-							<li><a href="profiles.jsp?id=${section.userId }">${section.userName }</a>
+							<li id="last_msg_date">${ topic.lastMsgDate }</li>
+							<li><a href="profiles.jsp?id=${topic.lastMsgUserId }">${topic.lastMsgUserName }</a>
 						<a href=""><img src="images/icon_topic_latest.gif"></a>
 							</li>
 						</ul>

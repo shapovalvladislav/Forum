@@ -1,7 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-  
+			<script type="text/javascript">
+      		function showLogin(state) {
+      	  		document.getElementById('login_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
+  		</script>
+	<div id="header" class="b5radius">
+		<img id="header_title" src="images/header_title.png">
+
+		<div id="header_user" class="visible">
+
+			<img src="images/default_icon.png">
+			<p>Вы вошли как:</p>
+			<p>NickName</p>
+			<form>
+				<input type="submit" name="logout" value="Выйти">
+			</form>
+		</div>
+
+		<div class="head_btn b5radius invisible">
+			<a class="text16" href="#">Регистрация</a>
+		</div>
+		<div class="head_btn b5radius invisible" onclick="showLogin('block')">
+			<p class="text16" href="#">Вход</p>
+		</div>
+
+	</div> <!-- header -->
+
+<!--   
 <header>
 <div class="row-fluid">
     <div class="span10 offset1">
@@ -51,3 +79,4 @@
 	</div>
 </div>
 </header>
+--> 

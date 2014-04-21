@@ -28,6 +28,43 @@
 	<jsp:include page="header.jsp" />
 	<jsp:include page="nav.jsp" />
 	
+	<div id="header" class="b5radius">
+		<img id="header_title" src="images/header_title.png">
+
+		<div id="header_user" class="visible">
+
+			<img src="images/default_icon.png">
+			<p>Вы вошли как:</p>
+			<p>NickName</p>
+			<form>
+				<input type="submit" name="logout" value="Выйти">
+			</form>
+		</div>
+
+		<div class="head_btn b5radius invisible">
+			<a class="text16" href="#">Регистрация</a>
+		</div>
+		<div class="head_btn b5radius invisible" onclick="showLogin('block')">
+			<p class="text16" href="#">Вход</p>
+		</div>
+
+	</div> <!-- header -->
+
+	<div id="nav_bar" class="b5radius">
+		<ul class="nav_text" id="nav">
+			<li><a href="index.html">Главная</a></li>
+			<li class="active_nav"><a href="top.html">ТОП 10</a></li>
+			<li><a  href="profile.html">Профиль</a></li>
+		</ul>
+		<div id="search">
+			<form>
+				<img src="images/search.png">
+				<input type="text" name="search" placeholder="Поиск..">
+			</form>
+		</div>
+	</div>
+
+
 	<div style="clear: both"></div>
 
 	<div id="content">
@@ -42,13 +79,13 @@
 				<c:forEach var="user" items="${topUsers }">
 					<tr>
 					<td class="section_in_table">
-						<a href="topics.html">${user.nickName }</a>
+						<a href="topics.html">NickName</a>
 					</td>
 					<td>${user.msgCount }</td>
 					<td>
 						<ul style="list-style: none">
 							<li id="last_msg_date">22.02 21.02.14</li>
-							<li><a href="#"></a>
+							<li><a href="#">${user.nickName }</a>
 						<a href=""><img src="/Forum/DisplayIcon?id=${user.id }"></a>
 							</li>
 						</ul>

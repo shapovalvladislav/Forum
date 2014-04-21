@@ -13,9 +13,6 @@
 	color: rgb(105,105,105);
 	background-color: #F5F5F5;
 	border: solid 1px #BDBDBD;
-	height: 40px;
-	vertical-align: middle;
-	font-size: 20px;
 }
 
 
@@ -44,7 +41,6 @@
 	background: #F5F5F5;
 	color: rgb(105,105,105);
 	border: solid 1px #BDBDBD;
-	height: 40px;
 }
 
 .section_in_table a  {

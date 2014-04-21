@@ -19,7 +19,7 @@
 		<meta charset="utf-8">
 		<link href="css/style.css" rel="stylesheet">
 		<link href="css/messages.css" rel="stylesheet">
-		<link href="css/tinyeditor.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/tinyeditor.css">
 		<script src="js/tiny.editor.packed.js"></script>
 	</head>
 
@@ -51,12 +51,14 @@
 <c:forEach var="message" items="${messages }">
 
 	
+
+
 		<div class="message">
 			<div class="fleft">
 				<img class="user_icon" src="/Forum/DisplayIcon?id=${message.profile.id }">
 				<br>
 				<a class="nick" href="#">${message.profile.nickName }</a>
-				<p class="ml_20">Дата: </p>
+				<p class="ml_20">Дата: ${message.date }</p>
 				<p class="ml_20">Test</p>
 			</div>
 		
@@ -69,7 +71,7 @@
 </c:forEach>
 
 		
-<c:if test="${empty sessionScope.loggedProfile }">
+<c:if test="${not empty sessionScope.loggedProfile }">
 				
 				<div class="message msg_send">
 				<div class="message">

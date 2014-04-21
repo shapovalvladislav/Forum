@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>\
-
-<jsp:include page="/TopUsersServlet" />
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Форум - ТОП 10</title>
+		<title>Форум - Профиль</title>
 		<meta charset="utf-8">
 		<link href="css/style.css" rel="stylesheet">
-		<link href="css/index.css" rel="stylesheet">
+		<link href="css/profile_user.css" rel="stylesheet">
 		<script type="text/javascript">
       		function showLogin(state) {
       	  		document.getElementById('login_window').style.display = state;      
@@ -25,39 +21,50 @@
 
 
 <div id="main">
+
 	<jsp:include page="header.jsp" />
+
 	<jsp:include page="nav.jsp" />
+
+<div id="content" class="b5radius">
+	<p id="user_title">Пользователь - Test</p>
 	
-	<div style="clear: both"></div>
+	<img id="user_icon" src="images/default_icon.png">
 
-	<div id="content">
-		<table border="1px" id="central_table" class="b5radius">
-			<th id="tb_section">Пользователь</th>
-			<th id="tb_msg">Сообщения</th>
-			<th id="tb_last_msg">Последнее сообщение</th>
-				
-				
-				<jsp:include page="/TopUsersServlet" />
+	<div class="user_info">
+		<p>NickName: Test</p>
+	</div>
 
-				<c:forEach var="user" items="${topUsers }">
-					<tr>
-					<td class="section_in_table">
-						<a href="topics.html">${user.nickName }</a>
-					</td>
-					<td>${user.msgCount }</td>
-					<td>
-						<ul style="list-style: none">
-							<li id="last_msg_date">22.02 21.02.14</li>
-							<li><a href="#"></a>
-						<a href=""><img src="/Forum/DisplayIcon?id=${user.id }"></a>
-							</li>
-						</ul>
-					</td>
-					</tr>
-				</c:forEach>
+	<div class="user_info">
+		<p>Имя: Test</p>
+	</div>
 
-		</table>
-	</div> <!--content-->
+	<div class="user_info">
+		<p>E-Mail: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Дата рождения: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Пол: Test</p>
+	</div>
+
+
+	<div class="user_info">
+		<p>Количество сообщений: Test</p>
+	</div>
+
+
+	<form action="" class="invisible">
+		<input type="submit" value="Удалить пользователя">
+	</form>
+
+
+</div> <!--content-->
 
 	<jsp:include page="footer.jsp" />
 

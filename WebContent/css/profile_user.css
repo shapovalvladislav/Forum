@@ -1,0 +1,24 @@
+#user_title {
+	text-align: center;
+	font-size: 30px;
+}
+
+#content {
+	width: 950px;
+	background-color: #F5F5F5;
+	margin-top: 10px;
+	padding-left: 50px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+#user_icon {
+	width: 128px;
+	height: 128px;
+}
+
+.user_info {
+	margin-top: 20px;
+}
+

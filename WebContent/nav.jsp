@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="row-fluid">
-	<div class="span10 offset1">
-		<div class="navbar" id="nav_bar">
- 			<div class="navbar-inner">
-  				<a class="brand" href="#">ФОРУМ</a>
-   				<ul class="nav">
-   			   		<li class="active"><a href="#">На главную</a></li>
-   			  		<li><a href="index.jsp">Разделы</a></li>
-   			   		<li><a href="#">ТОП 10</a></li>
-   			   		<li><a href="#">Профиль</a></li>
-   				</ul>
-   			<form>
-			<button class="btn b4radius btn_search">Поиск</button>
-			<input type="text" name="text_search" placeholder="Найти.." class="b4radius search_style">
-			<img class="search_img" src="images/search.png">
+	<div id="nav_bar" class="b5radius">
+		<ul class="nav_text" id="nav">
+			<li class="active_nav"><a href="/Forum/index.jsp">Главная</a></li>
+			<li><a href="/Forum/topUsers.jsp">ТОП 10</a></li>
+			<li><a  href="/Forum/profile.jsp">Профиль</a></li>
+		</ul>
+		<div id="search">
+			<form>
+				<img src="images/search.png">
+				<input type="text" name="search" placeholder="Поиск..">
 			</form>
- 			</div>
- 		</div>	
+		</div>
 	</div>
-</div> <!-- nav bar --> 
