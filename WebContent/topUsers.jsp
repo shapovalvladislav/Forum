@@ -32,6 +32,7 @@
 
 	<div id="content">
 		<table border="1px" id="central_table" class="b5radius">
+			<th id="tb_section">Изображение</th>
 			<th id="tb_section">Пользователь</th>
 			<th id="tb_msg">Сообщения</th>
 			<th id="tb_last_msg">Последнее сообщение</th>
@@ -41,6 +42,9 @@
 
 				<c:forEach var="user" items="${topUsers }">
 					<tr>
+					<td>
+					<img src="/Forum/DisplayIcon?id=${user.id }">
+					</td>
 					<td class="section_in_table">
 						<a href="topics.html">${user.nickName }</a>
 					</td>
@@ -49,7 +53,7 @@
 						<ul style="list-style: none">
 							<li id="last_msg_date">22.02 21.02.14</li>
 							<li><a href="#"></a>
-						<a href=""><img src="/Forum/DisplayIcon?id=${user.id }"></a>
+						<a href=""><img src="images/icon_topic_latest.gif"></a>
 							</li>
 						</ul>
 					</td>

@@ -1,6 +1,11 @@
 package ua.net.forum.servlets;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -8,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 
 import ua.net.forum.db.DBQuery;
 
@@ -32,8 +39,14 @@ public class DisplayIcon extends HttpServlet {
 		String profileId = request.getParameter("id");
 		byte[] icon = DBQuery.getIcon(profileId);
 		if (icon == null) {
-			System.out.println("NULL");
-			return;
+		
+			FileInputStream fileInputStream=null;
+	        File file = new File(request.getSession().getServletContext().getRealPath("/") + "images/default_icon.png"); 
+	        icon = new byte[(int) file.length()];
+	
+		    fileInputStream = new FileInputStream(file);
+		    fileInputStream.read(icon);
+		    fileInputStream.close();
 		}
 		response.setContentType("image/jpeg");  
 	    ServletOutputStream out;  

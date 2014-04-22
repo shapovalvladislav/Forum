@@ -47,11 +47,11 @@
 
 
 	    <div>
-	    	<input type="text" class="inputs" id="inputName" name="fullName" placeholder="Имя">
+	    	<input type="text" class="inputs" id="inputName" name="fullName" value="${sessionScope.loggedProfile.fullName }" placeholder="Имя">
 	    </div>
 
 	    <div>
-	    	<input type="text" class="inputs"  id="inputNickname" name="nickName" placeholder="Nickname">
+	    	<input type="text" class="inputs"  id="inputNickname" value="${sessionScope.loggedProfile.nickName }" name="nickName" placeholder="Nickname">
 	    </div>
 
 	    <div>
@@ -70,7 +70,7 @@
 		</div>
 
 		<div>
-	    	<input type="text" class="inputs"  id="inputEmail" name="email" placeholder="Email">
+	    	<input type="text" class="inputs"  id="inputEmail" name="email" value="${sessionScope.loggedProfile.email }" placeholder="Email">
 		</div>
 
 		<div>

@@ -15,8 +15,6 @@
 
 <body>
 
-
-
 	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}" />
 
 <div id="main">
@@ -49,7 +47,7 @@
 					<td>
 						<ul style="list-style: none">
 							<li id="last_msg_date">${ section.lastMsgDate }</li>
-							<li><a href="profiles.jsp?id=${section.userId }">${section.userName }</a>
+							<li><a href="profile.jsp?id=${section.userId }">${section.userName }</a>
 						<a href=""><img src="images/icon_topic_latest.gif"></a>
 							</li>
 						</ul>
@@ -64,21 +62,7 @@
 	<jsp:include page="footer.jsp" />
 
 
-	<div id="wrap">
-		<div id="login_window"> 
-		<form action="post">
-    		<img onclick="showLogin('none')" id="close_img" src="images/close.png">
-    		<p>
-    			Вход
-    		</p>
-    		<div style="clear: both"></div>
-    		<input type="text" placeholder="Логин" name="login" class="login_input">
-    		<input type="password" placeholder="********" name="password" class="login_input">
-    		<input type="submit" value="Войти" id="login_btn" class="text16 b5radius">
-			<div style="clear: both"></div>
-		</form>
-		</div>
- 	</div>
+
 
 </div> <!--maint -->
 
