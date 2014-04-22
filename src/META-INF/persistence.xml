@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence /home/bsa/JavaProjects/Forum/src/persistence_2_1.xsd">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence ../persistence_2_1.xsd">
 	<persistence-unit name="Forum">	
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<class>model.ForbiddenWord</class>
@@ -14,7 +14,7 @@
 		<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/Forum"/>
 		<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
 		<property name="openjpa.ConnectionUserName" value="postgres"/>
-		<property name="openjpa.ConnectionPassword" value="624593"/>
+		<property name="openjpa.ConnectionPassword" value="65332"/>
 		<property name="openjpa.jdbc.SubclassFetchMode" value="join"/>
 		<property name="openjpa.jdbc.EagerFetchMode" value="join"/>
 		</properties>

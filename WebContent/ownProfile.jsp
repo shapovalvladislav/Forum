@@ -31,7 +31,7 @@
 
 	<jsp:include page="header.jsp" />
 
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="nav.jsp?page=profile" />
 
 
 	

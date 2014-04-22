@@ -13,7 +13,7 @@
 
 	<div id="main">
 	<jsp:include page="header.jsp" />
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="nav.jsp?page=topics" />
 	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}?${pageContext.request.queryString }"/>  
 	<jsp:include page="/TopicServlet" />
 

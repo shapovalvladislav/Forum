@@ -33,6 +33,8 @@ public class DBQuery {
 	private static final String SELECT_TOP_USERS = "SELECT p FROM Profile p ORDER BY p.msgCount DESC";
 	private static final String SELECT_USER_BY_LOGIN = "SELECT u FROM User u WHERE u.login=:login";
 	private static final String SELECT_USER_BY_LOGIN_AND_PASSWORD = "SELECT x FROM User x WHERE x.login=:login AND x.password=:password";
+	private static final String SELECT_TOPIC_BY_ID = "SELECT x FROM Topic x WHERE x.id=:topicId";
+	
 	
 	private static Logger log = LogManager.getLogger(DBQuery.class.getName());
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Forum");
@@ -148,6 +150,28 @@ public class DBQuery {
 			return (Collection<Message>) list;
 		}
 	}
+	
+
+	public static Topic getTopicById(String topic) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Topic newTopic = null;
+		try {
+			Query query = em.createQuery(SELECT_TOPIC_BY_ID);
+			query.setParameter("topicId", Integer.parseInt(topic));
+			newTopic = (Topic) query.getResultList().get(0);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		}
+		finally {
+			em.close();
+			return newTopic;
+		}
+	}
+	
+	
 	
 	public static byte[] getIcon(String profileId) {
 		EntityManager em = emf.createEntityManager();

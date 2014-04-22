@@ -26,7 +26,7 @@
 
 <div id="main">
 	<jsp:include page="header.jsp" />
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="nav.jsp?page=top" />
 	
 	<div style="clear: both"></div>
 

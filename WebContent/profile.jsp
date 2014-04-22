@@ -15,7 +15,6 @@
   		</script>
 	</head>
 
-	
 
 <body>
 
@@ -24,9 +23,11 @@
 
 	<jsp:include page="header.jsp" />
 
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="nav.jsp?page=profile" />
 
 <div id="content" class="b5radius">
+
+
 	<p id="user_title">Пользователь - Test</p>
 	
 	<img id="user_icon" src="images/default_icon.png">
@@ -85,7 +86,7 @@
 		</div>
  	</div>
 
-</div> <!--maint -->
+</div> <!--main -->
 
 </body>
 

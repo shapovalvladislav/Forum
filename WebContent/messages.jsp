@@ -41,47 +41,42 @@
 		<hr class="line">
 
 		<div>
-			<p id="topic">Teма: Test</p>
-			<p id="author">Создал: Test</p>
+			<p id="topic">Teма:
+			${ topicName }
+			 </p>
+			<p id="author">Создал:
+			${ topicAutor }
+			</p>
 		</div>
 		<div style="clear: both"></div>
 		<hr class="line">
 
 
-<c:forEach var="message" items="${messages }">
+<c:forEach var="message" items="${ messages }">
 
 	
 		<div class="message">
 			<div class="fleft">
-				<img class="user_icon" src="/Forum/DisplayIcon?id=${message.profile.id }">
-				<br>
-				<a class="nick" href="#">${message.profile.nickName }</a>
-				<p class="ml_20">Дата: </p>
-				<p class="ml_20">Test</p>
+				<img class="user_icon fleft" src="/Forum/DisplayIcon?id=${message.profile.id }">
+				<a class="nick fleft ml_10" href="#">${message.profile.nickName }</a>
+				<p class="ml_20 fleft nick">Дата: </p>
+				<p class="ml_10 fleft nick">${ message.date }</p>
+				<div class="fleft msg_content">
+				${message.content }		
+				</div> 
 			</div>
-		
-			<div class="fleft msg_content">
-				${message.content }
-			</div>
+	
+			
 			<div style="clear: both"></div>
 		</div> <!-- message -->
  
 </c:forEach>
 
 		
-<c:if test="${empty sessionScope.loggedProfile }">
+<c:if test="${ not empty sessionScope.loggedProfile }">
 				
 				<div class="message msg_send">
-				<div class="message">
-					<div class="fleft">
-						<img class="user_icon" src="/Forum/DisplayIcon?id=${sessionScope.loggedProfile.id }">
-						<br>
-						<a class="nick" href="#">${sessionScope.loggedProfile.nickName }</a>
-					</div>
-				
-		
-					<div style="clear: both"></div>
-				</div> <!-- message -->				
+					
 				<div class="msg_send_content" >
 					<form onsubmit="window.editor.post()" method="post" action="/Forum/AddMessageServlet">
 				<textarea  name="msgContent"  id="tinyeditor" style="width: 100%; height: 200px"></textarea>

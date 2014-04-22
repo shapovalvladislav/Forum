@@ -35,6 +35,7 @@
 	height: 128px;
 	margin-left: 20px;
 	border: solid 1px #8470FF;
+	margin-bottom: 10px;
 }
 
 .fleft {
@@ -59,8 +60,11 @@
 .nick {
 	text-decoration: none;
 	color: #000;
-	margin-left: 20px;
-	margin-top: 5px;
+	font-style: italic;
+}
+
+.ml_10 {
+	margin-left: 10px;
 }
 
 .ml_20 {
