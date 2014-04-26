@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,6 +18,10 @@
   		</script>
 	</head>
 
+<c:if test="${param.id == sessionScope.loggedProfile.id }">
+	<c:redirect url="ownProfile.jsp" />
+</c:if>
+<jsp:include page="/ProfileServlet?id=${param.id }"></jsp:include>
 
 <body>
 
@@ -28,35 +35,38 @@
 <div id="content" class="b5radius">
 
 
-	<p id="user_title">Пользователь - Test</p>
+	<p id="user_title">Пользователь - ${profile.nickName }</p>
 	
-	<img id="user_icon" src="images/default_icon.png">
+	<img id="user_icon" src="/Forum/DisplayIcon?id=${profile.id }">
 
 	<div class="user_info">
-		<p>NickName: Test</p>
+		<p>Имя: ${profile.fullName }</p>
 	</div>
 
 	<div class="user_info">
-		<p>Имя: Test</p>
-	</div>
-
-	<div class="user_info">
-		<p>E-Mail: Test</p>
+		<p>E-Mail: ${profile.email }</p>
 	</div>
 
 
 	<div class="user_info">
-		<p>Дата рождения: Test</p>
+		<p>Дата рождения: ${profile.birthDate }</p>
 	</div>
 
 
 	<div class="user_info">
-		<p>Пол: Test</p>
+		<p>Пол: ${profile.sex }</p>
 	</div>
 
+	<div class="user_info">
+		<p>О себе: ${profile.about }</p>
+	</div>
 
 	<div class="user_info">
-		<p>Количество сообщений: Test</p>
+		<p>Количество тем: ${profile.topicCount }</p>
+	</div>
+
+	<div class="user_info">
+		<p>Количество сообщений: ${profile.msgCount }</p>
 	</div>
 
 

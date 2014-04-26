@@ -2,6 +2,7 @@ package ua.net.forum.servlets;
 
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -46,6 +47,8 @@ public class AddMessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String content = request.getParameter("msgContent");
+		String s = new String(Charset.forName("UTF-8").encode(content).array());
+		System.out.println(s);
 		System.out.println("Content " + content);
 		int topicId = Integer.parseInt(request.getParameter("topic"));
 		Profile profile = (Profile) request.getSession().getAttribute("loggedProfile");

@@ -14,7 +14,7 @@
 		<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/Forum"/>
 		<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
 		<property name="openjpa.ConnectionUserName" value="postgres"/>
-		<property name="openjpa.ConnectionPassword" value="65332"/>
+		<property name="openjpa.ConnectionPassword" value="624593"/>
 		<property name="openjpa.jdbc.SubclassFetchMode" value="join"/>
 		<property name="openjpa.jdbc.EagerFetchMode" value="join"/>
 		</properties>

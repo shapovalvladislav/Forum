@@ -22,8 +22,6 @@
   		</script>
 	</head>
 
-	
-
 <body>
 
 
@@ -85,13 +83,17 @@
 					document.write("<option value=\"" + i + "\">" + i + "</option>");
 				}
 				document.write("</select>");
+				
 				document.write("<select id=\"month\" name=\"month\">");
 				var months=["Январь","Февраль","Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 				for (var i=0; i<months.length; i++)
 					document.write("<option value=\"" + i + "\">" + months[i] + "</option>");
 				document.write("</select>");
+				
+				document.getElementById("day").value = ${sessionScope.loggedProfile.birthDate.day };
+				document.getElementById("month").value = ${sessionScope.loggedProfile.birthDate.month };
 				</script>
-				<input id="year" name="year" type="year">
+				<input id="year" value="${sessionScope.loggedProfile.birthDate.year + 1900 }" name="year" type="year">
 		</div>
 
 		<div>
@@ -103,14 +105,17 @@
 	      		<option value="male">M</option>
 	     	 	<option value="female">Ж</option>
 	     	</select>
+	     	<script>
+	     	document.getElementById("inputSex").value = "${sessionScope.loggedProfile.sex }";
+	     	</script>
 	    </div>
 
 	    <div>
-	  		<textarea id="inputAbout" name="about" rows="3"></textarea>
+	  		<textarea id="inputAbout" name="about" rows="3">${sessionScope.loggedProfile.about }</textarea>
 	  	</div>
 
 	  	<div>
-	    	<img id="icon" src="images/default_icon.png">
+	    	<img id="icon" src="/Forum/DisplayIcon?id=${sessionScope.loggedProfile.id }">
 	    </div>
 	    <div>
 	    	<input type="file" id="imageUpload" name="datafile"> 

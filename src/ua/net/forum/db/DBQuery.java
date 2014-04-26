@@ -26,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 public class DBQuery {
 	
+	private static final String SELECT_PROFILE_BY_ID = "SELECT p FROM Profile p WHERE p.id=:id";
 	private static final String SELECT_ROLE_BY_NAME = "SELECT r FROM Role r WHERE r.name=:name";
 	private static final String SELECT_SECTION = "SELECT x FROM Section x";
 	private static final String SELECT_TOPIC_BY_SECTION = "SELECT t FROM Topic t WHERE t.sectionBean.id=";
@@ -38,6 +39,26 @@ public class DBQuery {
 	
 	private static Logger log = LogManager.getLogger(DBQuery.class.getName());
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Forum");
+	
+	
+	public static Profile getProfileById(int id) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Profile p = null;
+		try {
+			Query query = em.createQuery(SELECT_PROFILE_BY_ID).setMaxResults(1);
+			query.setParameter("id", id);
+			p = (Profile) query.getResultList().get(0);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return p;
+	}
+	
 	
 	public static boolean userExists(String login, String password) {
 		EntityManager em = emf.createEntityManager();

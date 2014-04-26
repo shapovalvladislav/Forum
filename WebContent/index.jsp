@@ -11,8 +11,6 @@
 		<link href="css/index.css" rel="stylesheet">
 	</head>
 
-	
-
 <body>
 
 	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}" />
