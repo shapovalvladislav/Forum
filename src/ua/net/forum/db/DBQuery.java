@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.Message;
@@ -38,6 +39,7 @@ public class DBQuery {
 	
 	
 	private static Logger log = LogManager.getLogger(DBQuery.class.getName());
+	@PersistenceContext 
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Forum");
 	
 	
@@ -100,40 +102,7 @@ public class DBQuery {
 	}
 	
 
-	public static String getIcon(String login, String path) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		byte[] icon = null;
-		Profile profile = null;
-		try {
-			Query query = em.createQuery(SELECT_USER_BY_LOGIN);
-			query.setParameter("name", login);
-			profile = ((User) query.getResultList().get(0)).getProfileBean();
-			icon = profile.getIcon();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			log.error(e);
-			em.getTransaction().rollback();
-		}
-		finally {
-			em.close();
-		}
-		BufferedOutputStream bos;
-		String fileName = null;
-		try {
-			fileName = path + profile.getNickName();
-			File f = new File(fileName);
-			bos = new BufferedOutputStream(new FileOutputStream(fileName));
-			bos.write(icon);
-			bos.flush();
-			bos.close();
-		} catch (FileNotFoundException e) {
-			log.error(e);
-		} catch (IOException e) {
-			log.error(e);
-		}
-		return profile.getNickName();
-	}
+	
 	
 	public static Collection<Profile> getTopUsers() {
 		EntityManager em = emf.createEntityManager();
@@ -192,6 +161,25 @@ public class DBQuery {
 		}
 	}
 	
+	
+	public static User getUserByLogin(String login) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		User user = null;
+		try {
+			Query query = em.createQuery(SELECT_USER_BY_LOGIN);
+			query.setParameter("login",login);
+			user = (User) query.getResultList().get(0);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		}
+		finally {
+			em.close();
+			return user;
+		}
+	}
 	
 	
 	public static byte[] getIcon(String profileId) {
@@ -287,6 +275,7 @@ public class DBQuery {
 			em.close();
 			return profile;
 		}
+		
 	}
 	
 	public static void registerUser(User u) {
@@ -294,6 +283,21 @@ public class DBQuery {
 		em.getTransaction().begin();
 		try {
 			em.persist(u);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		finally {
+			em.close();
+		}
+	}
+	
+	public static void updateProfile(Profile u) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		try {
+			em.merge(u);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();

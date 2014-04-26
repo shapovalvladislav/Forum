@@ -36,7 +36,7 @@
 
 <div id="content" class="b5radius">
 	<p id="reg_title">Мой профиль</p>
-	<form method="post" action="">
+	<form method="post" action="/Forum/UpdateOwnProfileServlet">
 	    
 
 		<div id="reg_div_image">
@@ -53,12 +53,10 @@
 	    </div>
 
 	    <div>
-	    	<input type="text" class="inputs" readonly id="inputLogin" name="login" placeholder="${ login }">
+	    	<input type="text" class="inputs" readonly id="inputLogin" name="login" value="${ login }">
 	    </div>
 
-	  
-
-
+	 
 	    <div>
 	      	<input type="password" class="inputs"  id="inputNickname" name="old_password" placeholder="Старый пароль">
 		</div>
