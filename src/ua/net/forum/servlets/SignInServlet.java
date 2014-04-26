@@ -43,6 +43,7 @@ public class SignInServlet extends HttpServlet {
 		if (DBQuery.userExists(login, password)) {
 			Profile p = DBQuery.getProfileByLogin(login);
 			request.getSession().setAttribute("loggedProfile", p);
+			request.getSession().setAttribute("login", login);
 			response.sendRedirect(prevPage);
 		} else {
 			request.getRequestDispatcher("/signInError.jsp").forward(request, response);

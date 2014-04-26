@@ -53,7 +53,7 @@
 	    </div>
 
 	    <div>
-	    	<input type="text" class="inputs" readonly id="inputLogin" name="login" placeholder="Логин">
+	    	<input type="text" class="inputs" readonly id="inputLogin" name="login" placeholder="${ login }">
 	    </div>
 
 	  
