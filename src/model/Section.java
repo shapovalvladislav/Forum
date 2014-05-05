@@ -13,14 +13,14 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Sections\"")
-@NamedQuery(name="Section.findAll", query="SELECT s FROM Section s")
-public class Section implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getSections", query = "SELECT s FROM Section s")
+}
+)
+public class Section extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-
+	
 	private String description;
 
 	private String name;
@@ -31,18 +31,10 @@ public class Section implements Serializable {
 	private Profile profile;
 
 	//bi-directional many-to-one association to Topic
-	@OneToMany(mappedBy="sectionBean", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="sectionBean", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Topic> topics;
 
 	public Section() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getDescription() {

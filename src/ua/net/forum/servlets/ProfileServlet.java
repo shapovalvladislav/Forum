@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Profile;
+import service.IProfileService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 
 /**
@@ -31,7 +33,8 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		Profile p = DBQuery.getProfileById(id);
+		IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
+		Profile p = profileService.getEntityById(id);
 		request.setAttribute("profile", p);
 	}
 

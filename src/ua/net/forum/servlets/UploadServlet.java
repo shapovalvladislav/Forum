@@ -60,16 +60,13 @@ public class UploadServlet extends HttpServlet {
 	            	// Parse the request
 					List<FileItem> items = upload.parseRequest(request);
 					Iterator iterator = items.iterator();
-					System.out.println("before");
 					while (iterator.hasNext()) {
-						System.out.println("after");
 	                    FileItem item = (FileItem) iterator.next();
 	                    if (!item.isFormField()) {
 	                        String fileName = item.getName();
-	                        System.out.println("Filename " + fileName);
 	                        String root = getServletContext().getRealPath("/");
 	                        System.out.println("Root " + root);
-	                        File path = new File("/var/tmp/uploads");
+	                        File path = new File(root + "/uploads");
 	                        if (!path.exists()) {
 	                        	System.out.println("Path doesn't exist");
 	                        	boolean status = path.mkdirs();

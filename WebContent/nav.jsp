@@ -19,7 +19,7 @@
 			 </c:if>
 			><a href="/Forum/topUsers.jsp">ТОП 10</a></li>
 			
-			<c:if test="${ not empty sessionScope.loggedProfile }">
+			<c:if test="${ not empty sessionScope.loggedProfileId }">
 			
 			<li
 			<c:if test="${ curPage == 'profile' }">

@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.ServiceException;
 import model.Message;
+import model.Profile;
 import model.Section;
 import model.Topic;
+import service.ISectionService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import ua.net.forum.view.SectionForView;
 
@@ -38,30 +42,25 @@ public class SectionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Collection<Section> sections = DBQuery.getSections();
+		ServiceFactory factory = ServiceFactory.DEFAULT;
+		ISectionService service = factory.getSectionService();
+		Collection<Section> sections = service.getAllEntites();
+
 		List<SectionForView> sectionsForView = new ArrayList<SectionForView>();
 		for (Section section : sections) {
 			int id = section.getId();
 			String name = section.getName();
-			int topicCount = section.getTopics().size();
-			int msgCount = 0;
-			Timestamp lastMsgDate = null;
-			String lastMsgUserName = null;
-			int lastMsgUserId = 0;
-		
-			for (Topic topic : section.getTopics() ) {
-				msgCount += topic.getMsgCount();
-				for (Message msg : topic.getMessages()) {
-					Timestamp curMsgDate = msg.getDate();
-					if (lastMsgDate == null || curMsgDate.after(lastMsgDate)) {
-						lastMsgDate = curMsgDate;
-						lastMsgUserName = msg.getProfile().getFullName();
-						lastMsgUserId = msg.getProfile().getId();
-						continue;
-					}
-				}
+			int topicCount = service.getTopicCount(section);
+			int msgCount = service.getMsgCount(section);
+			Timestamp lastMsgDate = service.getLastMsgDate(section);
+			Profile p = service.getLastMsgProfile(section);
+			String lastMsgNickname = null;
+			int lastMsgProfileId = 0;
+			if (p != null) {
+				lastMsgNickname = p.getNickName();
+				lastMsgProfileId = p.getId();
 			}
-			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgUserName, lastMsgUserId);
+			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgNickname, lastMsgProfileId);
 			sectionsForView.add(sectionForView);
 		}
 		request.setAttribute("sections", sectionsForView);

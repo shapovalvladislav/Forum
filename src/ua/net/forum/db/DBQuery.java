@@ -225,7 +225,7 @@ public class DBQuery {
 		em.getTransaction().begin();
 		List<Section> list = null;
 		try {
-			Query query = em.createQuery(SELECT_SECTION);
+			Query query = em.createNamedQuery("getSections");
 			list = query.getResultList();
 			em.getTransaction().commit();
 		} catch (Exception e) {
@@ -293,11 +293,37 @@ public class DBQuery {
 		}
 	}
 	
-	public static void updateProfile(Profile u) {
+	public static void updateProfile(Profile p) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		try {
-			em.merge(u);
+			Profile profile = em.find(Profile.class, p.getId());
+			profile.setAbout(p.getAbout());
+			profile.setBirthDate(p.getBirthDate());
+			profile.setEmail(p.getEmail());
+			profile.setFullName(p.getFullName());
+			profile.setIcon(p.getIcon());
+			profile.setNickName(p.getNickName());
+			profile.setSex(p.getSex());
+			em.merge(profile);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		finally {
+			em.close();
+		}
+	}
+	
+	public static void updateUser(User u) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		try {
+			User user = em.find(User.class, u.getId());
+			user.setPassword(u.getPassword());
+			user.setRoleBean(u.getRoleBean());
+			em.merge(user);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();

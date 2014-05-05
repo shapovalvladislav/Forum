@@ -13,13 +13,14 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Roles\"")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getRoles", query = "SELECT r FROM Role r"),
+	@NamedQuery(name = "getRoleByName", query = "SELECT r FROM Role r WHERE r.name=?1")
+}
+)
+public class Role extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
 
 	private String name;
 
@@ -28,14 +29,6 @@ public class Role implements Serializable {
 	private List<User> users;
 
 	public Role() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {

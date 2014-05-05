@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,13 +14,15 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Profiles\"")
-@NamedQuery(name="Profile.findAll", query="SELECT p FROM Profile p")
-public class Profile implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getProfiles", query = "SELECT p FROM Profile p"),
+	@NamedQuery(name = "getProfileById", query = "SELECT p FROM Profile p WHERE p.id=:id"),
+	@NamedQuery(name = "getTopProfiles", query = "SELECT p FROM Profile p ORDER BY p.msgCount DESC")
+}
+)
+public class Profile extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
-	private Integer id;
 
 	private String about;
 
@@ -57,14 +61,6 @@ public class Profile implements Serializable {
 	private List<Topic> topics;
 
 	public Profile() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getAbout() {

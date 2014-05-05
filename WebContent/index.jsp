@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="/WEB-INF/tagLib" prefix="ct"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,15 +33,13 @@
 			<th id="tb_msg">Сообщения</th>
 			<th id="tb_last_msg">Последнее сообщение</th>
 				
-				<jsp:include page="/SectionServlet"></jsp:include>
-
-				<c:forEach var="section" items="${sections}">
-			
+			<ct:sections attrName="sections"/>
+				<c:forEach var="section" items="${ sections}" >
 				<tr>
 					<td class="section_in_table">
 						<a href="topics.jsp?id=${section.id }">${ section.name }</a>
 					</td>
-					<td>${section.topicCount }</td>
+		  			<td>${section.topicCount }</td>
 					<td>${section.msgCount }</td>
 					<td>
 						<ul style="list-style: none">
@@ -55,15 +54,11 @@
 				</c:forEach>
 
 		</table>
-	</div> <!--content-->
+	</div>
 
 	<jsp:include page="footer.jsp" />
 
-
-
-
-</div> <!--maint -->
-
+</div>
 </body>
 
 </html>

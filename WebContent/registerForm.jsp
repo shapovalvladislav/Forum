@@ -80,10 +80,11 @@
 		 $('#imageUpload').ajaxfileupload({
 		      'action': '/Forum/UploadServlet',	      	    
 		  'onComplete': function(response) {	        
-				var str = "DisplayImage?path=/var/tmp/uploads/" + document.getElementById("imageUpload").value;
-		        document.getElementById("icon").height = 128;
-		        document.getElementById("icon").width = 128;
-		        document.getElementById("icon").src = str;
+				var str = "/Forum/uploads/" + document.getElementById("imageUpload").value;
+				document.getElementById("icon_upload").src = str;
+		        document.getElementById("icon_upload").height = 128;
+		        document.getElementById("icon_upload").width = 128;
+		        
 		  }
 		 });
 	});
@@ -175,7 +176,7 @@
 	  	</div>
 
 	  	<div>
-	    	<img id="icon" src="images/default_icon.png">
+	    	<img id="icon_upload" src="images/default_icon.png">
 	    </div>
 	    <div>
 	    	<input type="file" id="imageUpload" name="datafile"> 

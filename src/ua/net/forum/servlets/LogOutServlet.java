@@ -26,7 +26,7 @@ public class LogOutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("loggedProfile");
+		request.getSession().removeAttribute("loggedProfileId");
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
 		response.sendRedirect(prevPage);
 	}

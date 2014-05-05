@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="/WEB-INF/tagLib" prefix="ct"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 			<script type="text/javascript">
       		function showLogin(state) {
@@ -7,18 +10,19 @@
           		document.getElementById('wrap').style.display = state;	
       		} 
   		</script>
-
-	<div id="header" class="b5radius">
+		
+		<div id="header" class="b5radius">
 		<img id="header_title" src="images/header_title.png">
-
-		<div id="header_user">
-
-			<img src="images/default_icon.png">
-			<p>Вы вошли как:</p>
-			<p>${sessionScope.loggedProfile.nickName }</p>
-				<a href="/Forum/LogOutServlet" name="logout">Выйти</a>
-
-		</div>
+		<c:if test="${ not empty sessionScope.loggedProfileId }">
+			<ct:loggedProfile profileId="${sessionScope.loggedProfileId }" />
+			<div id="header_user">
+	
+				<img id="icon" src="/Forum/DisplayIcon?id=${sessionScope.loggedProfileId }">
+				<p>Вы вошли как:</p>
+				<p>${profile.nickName }</p>
+					<a href="/Forum/LogOutServlet" name="logout">Выйти</a>
+			</div>
+		</c:if>
 
 		<div id="registerBtn" class="head_btn b5radius">
 			<a class="text16" href="/Forum/registerForm.jsp">Регистрация</a>
@@ -27,10 +31,10 @@
 			<p class="text16" href="#">Вход</p>
 		</div>
 
-	</div> <!-- header -->
+	</div>
 	
 	<c:choose>
-				<c:when test="${not empty sessionScope.loggedProfile }">
+				<c:when test="${not empty sessionScope.loggedProfileId }">
 					<script type="text/javascript">
 						document.getElementById("header_user").className = " visible";
 						document.getElementById("signInBtn").className += " invisible";

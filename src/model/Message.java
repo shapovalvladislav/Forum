@@ -13,13 +13,14 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="\"Messages\"")
-@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
-public class Message implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getMessages", query = "SELECT m FROM Message m"),
+	@NamedQuery(name = "getMessagesByTopic", query = "SELECT m FROM Message m WHERE m.topicBean.id=:topic ORDER BY m.date")
+}
+)
+public class Message extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
 
 	private String content;
 
@@ -36,14 +37,6 @@ public class Message implements Serializable {
 	private Topic topicBean;
 
 	public Message() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getContent() {

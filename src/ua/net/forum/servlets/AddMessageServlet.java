@@ -3,6 +3,8 @@ package ua.net.forum.servlets;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.IMessageService;
+import service.IProfileService;
+import service.ITopicService;
+import service.IUserService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import model.Message;
 import model.Profile;
@@ -47,12 +54,19 @@ public class AddMessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String content = request.getParameter("msgContent");
-		String s = new String(Charset.forName("UTF-8").encode(content).array());
-		System.out.println(s);
-		System.out.println("Content " + content);
 		int topicId = Integer.parseInt(request.getParameter("topic"));
-		Profile profile = (Profile) request.getSession().getAttribute("loggedProfile");
-		DBQuery.addMessage(topicId, content, profile);
+		int profileId = (int) request.getSession().getAttribute("loggedProfileId");
+		IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
+		Profile profile = profileService.getEntityById(profileId);
+		ITopicService topicService = ServiceFactory.DEFAULT.getTopicService();
+		Topic topic = topicService.getEntityById(topicId);
+		Message msg = new Message();
+		msg.setTopicBean(topic);
+		msg.setProfile(profile);
+		msg.setContent(content);
+		msg.setDate(new Timestamp(new Date().getTime()));
+		IMessageService messageService = ServiceFactory.DEFAULT.getMessageService();
+		messageService.addEntity(msg);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
 		response.sendRedirect(prevPage);
 	}

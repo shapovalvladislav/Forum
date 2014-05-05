@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Profile;
+import service.IProfileService;
+import service.IUserService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import ua.net.forum.db.HashPassword;
 
@@ -39,10 +42,11 @@ public class SignInServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = HashPassword.passwordToHash(request.getParameter("password"));
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-		System.out.println(prevPage);
-		if (DBQuery.userExists(login, password)) {
-			Profile p = DBQuery.getProfileByLogin(login);
-			request.getSession().setAttribute("loggedProfile", p);
+		IUserService userService = ServiceFactory.DEFAULT.getUserService();
+		if (userService.isUserExists(login, password)) {
+			IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
+			Profile p = profileService.findProfileByLogin(login);
+			request.getSession().setAttribute("loggedProfileId", p.getId());
 			request.getSession().setAttribute("login", login);
 			response.sendRedirect(prevPage);
 		} else {

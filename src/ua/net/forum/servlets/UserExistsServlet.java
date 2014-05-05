@@ -32,7 +32,15 @@ public class UserExistsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		PrintWriter out = response.getWriter();
-		out.print(DBQuery.loginExists(login));
+		if (DBQuery.loginExists(login)) {
+			System.out.println("true");
+			out.print("false");
+		}
+		else {
+			System.out.println("fasle");
+			out.print("true");
+		}
+			
 	}
 
 	/**

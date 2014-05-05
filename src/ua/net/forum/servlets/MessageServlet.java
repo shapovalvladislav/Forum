@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.ServiceException;
+import service.IMessageService;
+import service.ITopicService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import model.Message;
+import model.Topic;
 
 /**
  * Servlet implementation class MessageServlet
@@ -32,12 +37,20 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String topic = request.getParameter("topic");
-		Collection<Message> messages = DBQuery.getMessages(topic);
+		int topicId = Integer.parseInt(request.getParameter("topic"));
+		IMessageService messageService = ServiceFactory.DEFAULT.getMessageService();
+		Collection<Message> messages = null;
+
+	
+		ITopicService topicService = ServiceFactory.DEFAULT.getTopicService();
+		Topic topic = topicService.getEntityById(topicId);
+		System.out.println(topic.getName());
+		
+		messages = messageService.findByTopic(topic);
+		
 		request.setAttribute("messages", messages);
-		request.setAttribute("topicAutor", DBQuery.getTopicById(topic)
-				.getProfile().getNickName());
-		request.setAttribute("topicName", DBQuery.getTopicById(topic).getName());
+		request.setAttribute("topicAutor", topic.getProfile().getNickName());
+		request.setAttribute("topicName", topic.getName());
 	}
 
 	/**

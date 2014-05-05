@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Message;
+import model.Profile;
 import model.Topic;
+import service.ITopicService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import ua.net.forum.view.TopicForView;
 
@@ -36,25 +39,23 @@ public class TopicServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sectionId = request.getParameter("id");
-		Collection<Topic> topics = DBQuery.getTopics(sectionId);
+		ITopicService topicService = ServiceFactory.DEFAULT.getTopicService();
+		Collection<Topic> topics = topicService.getAllEntites();
 		List<TopicForView> topicsForView = new ArrayList<TopicForView>();
 		for (Topic topic : topics) {
 			int id = topic.getId();
 			String name = topic.getName();
 			int msgCount = topic.getMsgCount();
-			Timestamp lastMsgDate = null;
-			String lastMsgUserName = null;
-			int lastMsgUserId = 0;
-			for (Message msg : topic.getMessages()) {
-				Timestamp curMsgDate = msg.getDate();
-				if (lastMsgDate == null || curMsgDate.after(lastMsgDate)) {
-					lastMsgDate = curMsgDate;
-					lastMsgUserName = msg.getProfile().getFullName();
-					lastMsgUserId = msg.getProfile().getId();
-					continue;
-				}
+			Timestamp lastMsgDate = topicService.getLastMsgDate(topic);
+			Profile lastMsgProfile = topicService.getLastMsgProfile(topic); 
+			String lastMsgProfileNickName = null;
+			int lastMsgProfileId = 0;
+			if (lastMsgProfile != null)
+			{
+				lastMsgProfileNickName = lastMsgProfile.getNickName();
+				lastMsgProfileId = lastMsgProfile.getId();
 			}
-			TopicForView topicForView = new TopicForView(id, name, msgCount, lastMsgDate, lastMsgUserName, lastMsgUserId);
+			TopicForView topicForView = new TopicForView(id, name, msgCount, lastMsgDate, lastMsgProfileNickName, lastMsgProfileId);
 			topicsForView.add(topicForView);
 		}
 		request.setAttribute("topics", topicsForView);

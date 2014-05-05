@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Profile;
 import model.User;
+import service.IUserService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 import ua.net.forum.db.HashPassword;
+import ua.net.forum.mail.SendEmail;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -44,7 +47,8 @@ public class RegisterServlet extends HttpServlet {
 		String fullName = (String) request.getParameter("fullName");
 		String nickName = (String) request.getParameter("nickName");
 		String login = (String) request.getParameter("login");
-		String password = HashPassword.passwordToHash( (String) request.getParameter("password"));
+		String password = (String) request.getParameter("password");
+		String hashedPassword = HashPassword.passwordToHash(password);
 		String email = (String) request.getParameter("email");
 		Integer day = Integer.parseInt((String) request.getParameter("day"));
 		Integer month = Integer.parseInt((String) request.getParameter("month"));
@@ -76,12 +80,15 @@ public class RegisterServlet extends HttpServlet {
 	    
 	    User user = new User();
 	    user.setLogin(login);
-	    user.setPassword(password);
+	    user.setPassword(hashedPassword);
 	    user.setProfileBean(profile);
 	    user.setRoleBean(DBQuery.getUserRole());
-	    DBQuery.registerUser(user);
+	    IUserService userService = ServiceFactory.DEFAULT.getUserService();
+	    userService.addEntity(user);
+	    Thread sendEmail = new Thread(new SendEmail(email, login, password));
+	    sendEmail.start();
 	   
-		String nextJSP = "/index.jsp";
+		String nextJSP = "/Forum";
 		response.sendRedirect(nextJSP);
 	}
 }

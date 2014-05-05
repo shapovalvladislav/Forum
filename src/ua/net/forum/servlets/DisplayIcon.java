@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Profile;
+
 import org.apache.commons.io.IOUtils;
 
+import service.IProfileService;
+import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
 
 /**
@@ -36,8 +40,10 @@ public class DisplayIcon extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String profileId = request.getParameter("id");
-		byte[] icon = DBQuery.getIcon(profileId);
+		int profileId = Integer.parseInt(request.getParameter("id"));
+		IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
+		Profile profile = profileService.getEntityById(profileId);
+		byte[] icon = profile.getIcon();
 		if (icon == null) {
 		
 			FileInputStream fileInputStream=null;

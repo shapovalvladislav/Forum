@@ -14,13 +14,14 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Topics\"")
-@NamedQuery(name="Topic.findAll", query="SELECT t FROM Topic t")
-public class Topic implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getTopics", query = "SELECT t FROM Topic t"),
+	@NamedQuery(name = "getTopicsBySection", query = "SELECT t FROM Topic t WHERE t.sectionBean.id=?1")
+}
+)
+public class Topic extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
 
 	@Column(name="\"lastChange\"")
 	private Timestamp lastChange;
@@ -31,7 +32,7 @@ public class Topic implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="topicBean", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="topicBean", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Message> messages;
 
 	//bi-directional many-to-one association to Profile
@@ -40,19 +41,11 @@ public class Topic implements Serializable {
 	private Profile profile;
 
 	//bi-directional many-to-one association to Section
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="section")
 	private Section sectionBean;
 
 	public Topic() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Timestamp getLastChange() {

@@ -11,13 +11,15 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="\"Users\"", schema = "public")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+@NamedQueries( 
+{
+	@NamedQuery(name = "getUsers", query = "SELECT u FROM User u"),
+	@NamedQuery(name = "getUserByLogin", query = "SELECT u FROM User u WHERE u.login=?1"),
+	@NamedQuery(name = "getUserByLoginAndPassword", query = "SELECT u FROM User u WHERE u.login=?1 AND u.password=?2")
+}
+)
+public class User extends DomainSuperClass implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
 
 	private String login;
 
@@ -34,14 +36,6 @@ public class User implements Serializable {
 	private Profile profileBean;
 
 	public User() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getLogin() {

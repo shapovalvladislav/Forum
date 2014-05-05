@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/WEB-INF/tagLib" prefix="ct"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,7 +25,7 @@
 
 <body>
 
-
+<ct:loggedProfile profileId="${sessionScope.loggedProfileId }" />
 <div id="main">
 
 	<jsp:include page="header.jsp" />
@@ -45,11 +46,11 @@
 
 
 	    <div>
-	    	<input type="text" class="inputs" id="inputName" name="fullName" value="${sessionScope.loggedProfile.fullName }" placeholder="Имя">
+	    	<input type="text" class="inputs" id="inputName" name="fullName" value="${profile.fullName }" placeholder="Имя">
 	    </div>
 
 	    <div>
-	    	<input type="text" class="inputs"  id="inputNickname" value="${sessionScope.loggedProfile.nickName }" name="nickName" placeholder="Nickname">
+	    	<input type="text" class="inputs"  id="inputNickname" value="${profile.nickName }" name="nickName" placeholder="Nickname">
 	    </div>
 
 	    <div>
@@ -66,7 +67,7 @@
 		</div>
 
 		<div>
-	    	<input type="text" class="inputs"  id="inputEmail" name="email" value="${sessionScope.loggedProfile.email }" placeholder="Email">
+	    	<input type="text" class="inputs"  id="inputEmail" name="email" value="${profile.email }" placeholder="Email">
 		</div>
 
 		<div>
@@ -88,10 +89,10 @@
 					document.write("<option value=\"" + i + "\">" + months[i] + "</option>");
 				document.write("</select>");
 				
-				document.getElementById("day").value = ${sessionScope.loggedProfile.birthDate.day };
-				document.getElementById("month").value = ${sessionScope.loggedProfile.birthDate.month };
+				document.getElementById("day").value = ${profile.birthDate.day };
+				document.getElementById("month").value = ${profile.birthDate.month };
 				</script>
-				<input id="year" value="${sessionScope.loggedProfile.birthDate.year + 1900 }" name="year" type="year">
+				<input id="year" value="${profile.birthDate.year }" name="year" type="year">
 		</div>
 
 		<div>
@@ -104,16 +105,16 @@
 	     	 	<option value="female">Ж</option>
 	     	</select>
 	     	<script>
-	     	document.getElementById("inputSex").value = "${sessionScope.loggedProfile.sex }";
+	     	document.getElementById("inputSex").value = "${profile.sex }";
 	     	</script>
 	    </div>
 
 	    <div>
-	  		<textarea id="inputAbout" name="about" rows="3">${sessionScope.loggedProfile.about }</textarea>
+	  		<textarea id="inputAbout" name="about" rows="3">${profile.about }</textarea>
 	  	</div>
 
 	  	<div>
-	    	<img id="icon" src="/Forum/DisplayIcon?id=${sessionScope.loggedProfile.id }">
+	    	<img id="icon" src="/Forum/DisplayIcon?id=${sessionScope.loggedProfileId }">
 	    </div>
 	    <div>
 	    	<input type="file" id="imageUpload" name="datafile"> 
@@ -162,13 +163,13 @@
 			<div style="clear: both"></div>
 		</form>
 		<div style="clear: both"></div>
-	</div> <!--delete_window -->
+	</div>
 
 
 
  	</div>
 
-</div> <!--maint -->
+</div>
 
 </body>
 

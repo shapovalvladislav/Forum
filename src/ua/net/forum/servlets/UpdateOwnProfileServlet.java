@@ -54,46 +54,46 @@ public class UpdateOwnProfileServlet extends HttpServlet {
 		Integer month = Integer
 				.parseInt((String) request.getParameter("month"));
 		Integer year = Integer.parseInt((String) request.getParameter("year"));
+		year -= 1900;
+		@SuppressWarnings("deprecation")
 		Date birthDate = new Date(year, month, day);
 		String sex = (String) request.getParameter("sex");
 		String about = (String) request.getParameter("about");
 		String file = (String) request.getParameter("datafile");
-		System.out.println(fullName);
 		Profile profile = DBQuery.getProfileByLogin(login);
-	//	System.out.println(login);
-		//System.out.println(profile);
-	//	profile.setFullName(fullName);
-		System.out.println(profile.getFullName());
-//		profile.setNickName(nickName);
-//		profile.setEmail(email);
-//		profile.setBirthDate(birthDate);
-//		profile.setSex(sex);
-//		profile.setAbout(about);
-//
-//		if (!file.isEmpty()) {
-//			String path = "/var/tmp/uploads/" + file;
-//			File icon = new File(path);
-//			FileInputStream fileInputStream = new FileInputStream(icon);
-//			byte[] bFile = new byte[(int) icon.length()];
-//			fileInputStream.read(bFile);
-//			fileInputStream.close();
-//		//	profile.setIcon(bFile);
-//		}
+		profile.setFullName(fullName);
+		
+		profile.setNickName(nickName);
+		profile.setEmail(email);
+		profile.setBirthDate(birthDate);
+		profile.setSex(sex);
+		profile.setAbout(about);
+
+		if (!file.isEmpty()) {
+			String path = "/var/tmp/uploads/" + file;
+			File icon = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(icon);
+			byte[] bFile = new byte[(int) icon.length()];
+			fileInputStream.read(bFile);
+			fileInputStream.close();
+			profile.setIcon(bFile);
+		}
 
 		DBQuery.updateProfile(profile);
-//		User user = DBQuery.getUserByLogin(login);
-//		user.setProfileBean(profile);
-//		if (!old_password.isEmpty() || !new_password.isEmpty()) {
-//			String hashOldPass = HashPassword.passwordToHash((String) request
-//					.getParameter("old_password"));
-//			if (hashOldPass == user.getPassword()) {
-//				String hashNewPass = HashPassword
-//						.passwordToHash((String) request
-//								.getParameter("new_password"));
-//				user.setPassword(hashNewPass);
-//			}
-//		}
-	//	DBQuery.registerUser(user);
+		
+		User user = DBQuery.getUserByLogin(login);
+		user.setProfileBean(profile);
+		if (!old_password.isEmpty() || !new_password.isEmpty()) {
+			String hashOldPass = HashPassword.passwordToHash((String) request
+					.getParameter("old_password"));
+			if (hashOldPass == user.getPassword()) {
+				String hashNewPass = HashPassword
+						.passwordToHash((String) request
+								.getParameter("new_password"));
+				user.setPassword(hashNewPass);
+			}
+		}
+		DBQuery.updateUser(user);
 		
 		String nextJSP = "/Forum/ownProfile.jsp";
 		response.sendRedirect(nextJSP);
