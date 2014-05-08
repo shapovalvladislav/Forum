@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.IForbiddenWordService;
 import service.IMessageService;
 import service.IProfileService;
 import service.ITopicService;
@@ -52,8 +54,13 @@ public class AddMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 		String content = request.getParameter("msgContent");
+		
+		IForbiddenWordService forbiddenService = ServiceFactory.DEFAULT.getForbiddenWordService();
+		String hidden = forbiddenService.hideForbiddenWords(content);
+		if (hidden != null)
+			content = hidden;
 		int topicId = Integer.parseInt(request.getParameter("topic"));
 		int profileId = (int) request.getSession().getAttribute("loggedProfileId");
 		IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
@@ -69,6 +76,6 @@ public class AddMessageServlet extends HttpServlet {
 		messageService.addEntity(msg);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
 		response.sendRedirect(prevPage);
-	}
+}
 
 }

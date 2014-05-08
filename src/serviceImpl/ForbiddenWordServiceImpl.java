@@ -1,5 +1,7 @@
 package serviceImpl;
 
+import java.util.Collection;
+
 import model.ForbiddenWord;
 import dao.DaoFactory;
 import dao.IForbiddenWordDao;
@@ -30,5 +32,21 @@ public class ForbiddenWordServiceImpl extends GenericServiceImpl<ForbiddenWord>
 			ForbiddenWord newEntity) {
 		if (newEntity.getWord() != null)
 			savedEntity.setWord(newEntity.getWord());
+	}
+
+	@Override
+	public String hideForbiddenWords(String text) {
+		Collection<ForbiddenWord> forbiddenWords = getAllEntites();
+		boolean found = false;
+		for (ForbiddenWord word : forbiddenWords) {
+			String forbiddenWord = word.getWord();
+			if (text.lastIndexOf(forbiddenWord) != -1) {
+				text = text.replaceAll(forbiddenWord, "<span style='color: red'>&ltcensored&gt</span>");
+				found = true;
+			}
+		}
+		if (!found)
+			return null;
+		return text;
 	}
 }

@@ -23,12 +23,12 @@
 		<meta charset="utf-8">
 		<link href="css/style.css" rel="stylesheet">
 		<link href="css/messages.css" rel="stylesheet">
-		<%--
+		
 		<link href="css/tinyeditor.css" rel="stylesheet">
 		<script src="js/tiny.editor.packed.js"></script>
-		--%>
-		<link type="text/css" rel="stylesheet" href="css/jquery-te-1.4.0.css">
-		<link type="text/css" rel="stylesheet" href="css/demo.css">
+		
+	<%--	<link type="text/css" rel="stylesheet" href="css/jquery-te-1.4.0.css">
+		<link type="text/css" rel="stylesheet" href="css/demo.css">--%>
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 	</head>
@@ -88,8 +88,8 @@
 				<div class="message msg_send">
 					
 				<div class="msg_send_content" >
-					<form onsubmit="testEditor()" method="post" action="/Forum/AddMessageServlet">
-				<textarea name="textarea" class="jqte-test">
+					<form onsubmit="editor.post()" method="post" action="/Forum/AddMessageServlet">
+	<%--			<textarea name="textarea" class="jqte-test">
 				<b>My contents are from <u><span style="color:rgb(0, 148, 133);">TEXTAREA</span></u></b>
 				</textarea>
 				<script>
@@ -103,8 +103,8 @@
 						$('.jqte-test').jqte({"status" : jqteStatus})
 					});
 				</script>
-				
-	<%--		<textarea  name="msgContent"  id="tinyeditor" style="width: 100%; height: 200px"></textarea>
+	--%>	
+			<textarea  name="msgContent"  id="tinyeditor" style="width: 100%; height: 200px"></textarea>
 			<script>
 				window.editor = new TINY.editor.edit('editor', {
 					id: 'tinyeditor',
@@ -127,7 +127,7 @@
 					resize: {cssclass: 'resize'}
 				});
 				</script>
-			--%>
+			
 						<input type="hidden" name="topic" value="${param.id }" />
 						<div class="control-group">
 					    <div class="controls">

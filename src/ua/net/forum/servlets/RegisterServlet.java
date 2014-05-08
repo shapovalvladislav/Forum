@@ -57,8 +57,9 @@ public class RegisterServlet extends HttpServlet {
 		String sex = (String) request.getParameter("sex");
 		String about = (String) request.getParameter("about");
 		String file = (String) request.getParameter("datafile");
+		System.out.println(request.getServerName());
 		
-		String path = "/var/tmp/uploads/" + file;
+		String path = request.getServerName() + "/var/tmp/uploads/" + file;
 		
 		
 		File icon = new File(path);

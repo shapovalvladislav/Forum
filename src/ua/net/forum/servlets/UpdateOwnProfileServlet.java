@@ -44,6 +44,7 @@ public class UpdateOwnProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String fullName = (String) request.getParameter("fullName");
 		String nickName = (String) request.getParameter("nickName");
 		String login = (String) request.getParameter("login");
