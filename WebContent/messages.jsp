@@ -48,6 +48,7 @@
 
 	<div id="content" class="b5radius">
 
+		${pageCount }
 		<hr class="line">
 
 		<div>
@@ -62,10 +63,10 @@
 		<hr class="line">
 
 
-<c:forEach var="message" items="${ messages }">
+<c:forEach var="message" varStatus="theCount" items="${ messages }">
 
-	
-		<div class="message">
+		${theCount.last ? '<div class="message" id="last">' : '<div class="message">'}
+
 			<div class="fleft">
 				<img class="user_icon fleft" src="/Forum/DisplayIcon?id=${message.profile.id }">
 				<a class="nick fleft ml_10" href="#">${message.profile.nickName }</a>

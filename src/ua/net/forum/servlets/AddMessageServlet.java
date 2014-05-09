@@ -57,10 +57,6 @@ public class AddMessageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String content = request.getParameter("msgContent");
 		
-		IForbiddenWordService forbiddenService = ServiceFactory.DEFAULT.getForbiddenWordService();
-		String hidden = forbiddenService.hideForbiddenWords(content);
-		if (hidden != null)
-			content = hidden;
 		int topicId = Integer.parseInt(request.getParameter("topic"));
 		int profileId = (int) request.getSession().getAttribute("loggedProfileId");
 		IProfileService profileService = ServiceFactory.DEFAULT.getProfileService();
@@ -75,7 +71,7 @@ public class AddMessageServlet extends HttpServlet {
 		IMessageService messageService = ServiceFactory.DEFAULT.getMessageService();
 		messageService.addEntity(msg);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-		response.sendRedirect(prevPage);
+		response.sendRedirect(prevPage + "#last");
 }
 
 }
