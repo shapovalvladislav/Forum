@@ -69,7 +69,8 @@ public class MessageServlet extends HttpServlet {
 		if (pageNumber == pageCount)
 			end = messages.size() - 1;
 		Message[] messagesFromPage = Arrays.copyOfRange(allMessages, beg, end);
-		System.out.println("beg: " + beg + "; end: " + end);
+		
+		selectPageList(18, 20);
 		
 		request.setAttribute("messages", messagesFromPage);
 		request.setAttribute("pageCount", pageCount);
@@ -83,6 +84,28 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+	}
+	
+	private void selectPageList(int pageNumber, int pageCount) {
+		if (pageNumber == 1) {
+			int right = pageCount;
+			while (right > 5)
+				right /= 2;
+			for (int i = 1; i <= right; i++)
+				System.out.println(i);
+			return;
+		}
+		int left = pageNumber - 1;
+		int right = pageCount - left;
+		int min = (left < right) ? left : right;
+		if (min > 5)
+			min = 5;
+		for (int i = (pageNumber - min); i < pageNumber; i++)
+			System.out.println(i);
+		System.out.println(pageNumber);
+		for (int i = pageNumber + 1; i < (pageNumber + min); i++)
+			System.out.println(i);
+		
 	}
 
 }
