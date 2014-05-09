@@ -3,6 +3,8 @@ package ua.net.forum.servlets;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import exceptions.ServiceException;
+import model.Message;
+import model.Topic;
 import service.IForbiddenWordService;
 import service.IMessageService;
 import service.ITopicService;
 import service.ServiceFactory;
-import ua.net.forum.db.DBQuery;
-import model.Message;
-import model.Topic;
 
 /**
  * Servlet implementation class MessageServlet
@@ -68,10 +68,14 @@ public class MessageServlet extends HttpServlet {
 		int end = beg + 9;
 		if (pageNumber == pageCount)
 			end = messages.size() - 1;
-		Message[] messagesFromPage = Arrays.copyOfRange(allMessages, beg, end);
 		
-		selectPageList(18, 20);
+		Message[] messagesFromPage = Arrays.copyOfRange(allMessages, beg, end+1);
+		System.out.println(messagesFromPage.length);
+		Collection<String> links = selectPageList(pageNumber, pageCount, topicId);
 		
+		for (String s : links)
+			System.out.println(s);
+		request.setAttribute("pageLinks", links);
 		request.setAttribute("messages", messagesFromPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("topicAutor", topic.getProfile().getNickName());
@@ -86,26 +90,39 @@ public class MessageServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 	}
 	
-	private void selectPageList(int pageNumber, int pageCount) {
+	private Collection<String> selectPageList(int pageNumber, int pageCount, int topicId) {
+		Map<Integer, String> page_link = new TreeMap<Integer, String>();
+		
 		if (pageNumber == 1) {
 			int right = pageCount;
 			while (right > 5)
 				right /= 2;
 			for (int i = 1; i <= right; i++)
-				System.out.println(i);
-			return;
+				page_link.put(i, "<a class='pageLinks' href='/Forum/messages.jsp?id=" + topicId + "&page=" + i + "'>" + i + "</a>");
+		} else {
+			int left = pageNumber - 1;
+			int right = pageCount - left;
+			int min = (left < right) ? left : right;
+			if (min > 5)
+				min = 5;
+			for (int i = (pageNumber - min); i <= pageNumber; i++)
+				page_link.put(i, "<a class='pageLinks' href='/Forum/messages.jsp?id=" + topicId + "&page=" + i + "'>" + i + "</a>");
+			for (int i = pageNumber + 1; i < (pageNumber + min); i++)
+				page_link.put(i, "<a class='pageLinks' href='/Forum/messages.jsp?id=" + topicId + "&page=" + i + "'>" + i + "</a>");
 		}
-		int left = pageNumber - 1;
-		int right = pageCount - left;
-		int min = (left < right) ? left : right;
-		if (min > 5)
-			min = 5;
-		for (int i = (pageNumber - min); i < pageNumber; i++)
-			System.out.println(i);
-		System.out.println(pageNumber);
-		for (int i = pageNumber + 1; i < (pageNumber + min); i++)
-			System.out.println(i);
+		if (!page_link.containsKey(1))
+			page_link.put(1, "<a class='pageLinks' href='/Forum/messages.jsp?id=" + topicId + "&page=1'>" + 1 + "</a>");
+		if (!page_link.containsKey(pageCount))
+			page_link.put(pageCount, "<a class='pageLinks' href='/Forum/messages.jsp?id=" + topicId + "&page=" + pageCount + "'>" + pageCount + "</a>");
 		
+		String curLink = page_link.get(pageNumber);
+		curLink = curLink.replaceFirst("<a class='pageLinks'", "<a class='pageLinks pageVisited'");
+		page_link.put(pageNumber, curLink);
+		
+		return page_link.values();
+		
+//		for (String j : page_link.values())
+//			System.out.println(j);
 	}
 
 }

@@ -48,7 +48,10 @@
 
 	<div id="content" class="b5radius">
 
-		${pageCount }
+		<c:forEach var="link" items="${ pageLinks}">
+			${link }
+		</c:forEach>
+		
 		<hr class="line">
 
 		<div>
