@@ -61,13 +61,14 @@ public class AddTopicServlet extends HttpServlet {
 		
 		topic.setName(topicName);
 		topic.setProfile(profile);
-	
+		topic.setMsgCount(0);
+		message.setTopicBean(topic);
 		
 		List<Message> listMsgs = new ArrayList<Message>();
 		listMsgs.add(message);
 		
 		topic.setMessages(listMsgs);
-		message.setTopicBean(topic);
+		
 		
 		int sectionId = Integer.parseInt(request.getParameter("section"));
 		ISectionService sectionService = ServiceFactory.DEFAULT.getSectionService();

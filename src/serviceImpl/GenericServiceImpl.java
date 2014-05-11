@@ -70,7 +70,7 @@ public abstract class GenericServiceImpl<T extends DomainSuperClass> implements
 		try {
 
 			// Создаем новую сущность, которая будет сохранена в бд
-			T newEntity = createNewEntityFromTheOneToAdd(entity);
+			T newEntity = entity;
 
 			newEntity = dao.save(newEntity);
 

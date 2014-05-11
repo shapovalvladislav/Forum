@@ -210,6 +210,7 @@ public abstract class GenericDaoJpa<T extends DomainSuperClass> implements
 			entityManager.getTransaction().commit();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			// Catching exceptions and rollback of transaction
 			entityManager.getTransaction().rollback();
 

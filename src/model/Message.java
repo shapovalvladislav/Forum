@@ -32,7 +32,7 @@ public class Message extends DomainSuperClass implements Serializable {
 	private Profile profile;
 
 	//bi-directional many-to-one association to Topic
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="topic")
 	private Topic topicBean;
 

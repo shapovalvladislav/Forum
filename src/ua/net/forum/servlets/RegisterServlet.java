@@ -59,8 +59,8 @@ public class RegisterServlet extends HttpServlet {
 		String file = (String) request.getParameter("datafile");
 		System.out.println(request.getServerName());
 		
-		String path = request.getServerName() + "/var/tmp/uploads/" + file;
-		
+		String path = request.getSession().getServletContext().getRealPath("/") + "/uploads/" + file;
+		System.out.println(path);
 		
 		File icon = new File(path);
 	   	FileInputStream fileInputStream=new FileInputStream(icon);
