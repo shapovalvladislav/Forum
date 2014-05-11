@@ -9,6 +9,14 @@
       	  		document.getElementById('login_window').style.display = state;      
           		document.getElementById('wrap').style.display = state;	
       		} 
+      		function newSection(state) {
+      	  		document.getElementById('new_section_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
+      		function newTopic(state) {
+      	  		document.getElementById('new_topic_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
   		</script>
 		
 		<div id="header" class="b5radius">
@@ -62,6 +70,34 @@
     		<input type="text" placeholder="Логин" name="login" class="login_input">
     		<input type="password" placeholder="********" name="password" class="login_input">
     		<input type="submit" value="Войти" id="login_btn" class="text16 b5radius">
+			<div style="clear: both"></div>
+		</form>
+		</div>
+		<div id="new_section_window"> 
+			<form method="post" action="/Forum/AddSectionServlet">
+	    		<img onclick="newSection('none')" id="close_img" src="images/close.png">
+	    		<p>
+	    			Новый раздел
+	    		</p>
+	    		<div style="clear: both"></div>
+	    		<input type="text" placeholder="Имя раздела" name="sectionName" class="login_input">
+	    		<input type="text" placeholder="Краткое описание" name="sectionDescription" class="login_input">
+	    		<input type="submit" value="Добавить" id="login_btn" class="text16 b5radius">
+				<div style="clear: both"></div>
+			</form>
+		</div>
+		
+		<div id="new_topic_window"> 
+		<form method="post" action="/Forum/AddTopicServlet">
+    		<img onclick="newSection('none')" id="close_img" src="images/close.png">
+    		<p>
+    			Новая тема
+    		</p>
+    		<div style="clear: both"></div>
+    		<input type="hidden" name="section" value="${param.id }" />
+    		<input type="text" placeholder="Название темы" name="topicName" class="login_input">
+    		<textarea id="new_topic_textarea" name="message" placeholder="Cooбщение"></textarea>
+    		<input type="submit" value="Добавить" id="login_btn" class="text16 b5radius">
 			<div style="clear: both"></div>
 		</form>
 		</div>

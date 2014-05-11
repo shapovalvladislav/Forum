@@ -17,6 +17,12 @@
 	<c:set var="prevPage" scope="session" value="${pageContext.request.requestURI}?${pageContext.request.queryString }"/>  
 	<jsp:include page="/TopicServlet" />
 
+<c:if test="${ not empty sessionScope.loggedProfileId }">
+	<div style="clear: both"></div>
+		<div class="add_btn b5radius visible" onclick="newTopic('block')">
+			<p class="text16">Добавить</p>
+		</div>
+</c:if>
 	<div style="clear: both"></div>
 
 	<div id="content">

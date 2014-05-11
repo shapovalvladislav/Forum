@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.ServiceException;
 import model.Message;
 import model.Profile;
 import model.Topic;
@@ -40,7 +41,14 @@ public class TopicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sectionId = request.getParameter("id");
 		ITopicService topicService = ServiceFactory.DEFAULT.getTopicService();
-		Collection<Topic> topics = topicService.getAllEntites();
+		Collection<Topic> topics = null;
+		try {
+			topics = topicService.findBySection(Integer.parseInt(sectionId));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 		List<TopicForView> topicsForView = new ArrayList<TopicForView>();
 		for (Topic topic : topics) {
 			int id = topic.getId();

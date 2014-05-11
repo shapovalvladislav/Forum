@@ -23,7 +23,12 @@
 
 	<jsp:include page="nav.jsp?page=index" />
 
-
+<c:if test="${ not empty sessionScope.loggedProfileId }">
+	<div style="clear: both"></div>
+		<div class="add_btn b5radius visible" onclick="newSection('block')">
+			<p class="text16">Добавить</p>
+		</div>
+</c:if>	
 	<div style="clear: both"></div>
 
 	<div id="content">

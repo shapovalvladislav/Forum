@@ -235,3 +235,68 @@ body {
 	position: fixed;
 }
 
+
+
+ #new_section_window{
+    width: 350px;
+    margin: 228px auto;
+    margin-bottom: 500px;
+    display: none;
+    background-color: #DCDCDC;
+    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-bottom: 30px;
+  }
+
+  #new_section_window p {
+    float: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    font-size: 30px;
+    color: #000;
+  }
+
+  .add_btn {
+  float: right;
+  background-image: url(../images/header_button.png);
+  width: 104px;
+  height: 22px;
+  margin-top: 5px;
+  text-align: center;
+  padding-top: 4px;
+  cursor: pointer;
+  display: block;
+}
+
+.add_btn:hover {
+  background-image: url(../images/header_button_hover.png);
+}
+
+#new_topic_textarea {
+  margin-left: 50px;
+  width: 250px;
+  border: 1px solid #CDC9C9;
+  height: 200px;
+  resize: none;
+}
+
+ #new_topic_window{
+    width: 350px;
+    margin: 228px auto;
+    margin-bottom: 500px;
+    display: none;
+    background-color: #DCDCDC;
+    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-bottom: 30px;
+  }
+
+  #new_topic_window p {
+    float: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    font-size: 30px;
+    color: #000;
+  }
