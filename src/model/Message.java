@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @NamedQueries( 
 {
 	@NamedQuery(name = "getMessages", query = "SELECT m FROM Message m"),
-	@NamedQuery(name = "getMessagesByTopic", query = "SELECT m FROM Message m WHERE m.topicBean.id=:topic ORDER BY m.date")
+	@NamedQuery(name = "getMessagesByTopic", query = "SELECT m FROM Message m WHERE m.topicBean.id= ?1 ORDER BY m.date")
 }
 )
 public class Message extends DomainSuperClass implements Serializable {

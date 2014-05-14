@@ -53,7 +53,7 @@ public class SendEmail implements Runnable {
 		props = new Properties();
 		InputStream input;
 		try {
-			input = new FileInputStream(PROPERTIES_FILE);
+			input = new FileInputStream("/home/bsa/JavaProjects/Forum/" + PROPERTIES_FILE);
 			props.load(input);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();

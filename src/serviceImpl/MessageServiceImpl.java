@@ -28,7 +28,7 @@ public class MessageServiceImpl extends GenericServiceImpl<Message> implements
 	
 	@Override
 	public Collection<Message> findByTopic(Topic topic) {
-		return topic.getMessages();
+		return messageDao.findByTopic(topic.getId());
 	}
 
 	@Override
