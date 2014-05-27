@@ -79,7 +79,7 @@ public abstract class GenericDaoJpa<T extends DomainSuperClass> implements
 
 			// Removing entity
 			entityManager.remove(savedEntity);
-
+			
 			// Commit the transaction, which will cause the entity to
 			// be stored in the database
 			entityManager.getTransaction().commit();

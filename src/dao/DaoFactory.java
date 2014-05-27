@@ -25,4 +25,5 @@ public abstract class DaoFactory {
 	public abstract IRoleDao getRoleDao();
 	public abstract IMessageDao getMessageDao();
 	public abstract IForbiddenWordDao getForbiddenWordDao();
+	public abstract ITestDao getTestDao();
 }
