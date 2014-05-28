@@ -1,6 +1,7 @@
 package daoImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
@@ -18,8 +19,8 @@ public class ProfileDaoJpa extends GenericDaoJpa<Profile> implements IProfileDao
 	}
 
 	@Override
-	public Collection<Profile> findTopProfiles() throws PersistenceException {
-		return executeQuery(DBQueries.GET_TOP_PROFILES, true, false);
+	public Collection<Object> findTopProfiles() throws PersistenceException {
+		return executeNativeQuery(DBQueries.GET_TOP_PROC, false);
 	}
 
 }

@@ -17,6 +17,14 @@
       	  		document.getElementById('new_topic_window').style.display = state;      
           		document.getElementById('wrap').style.display = state;	
       		}
+      		function delOwnProfile(state) {
+      	  		document.getElementById('delete_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
+      		function delUserProfile(state) {
+      	  		document.getElementById('delete_user_window').style.display = state;      
+          		document.getElementById('wrap').style.display = state;	
+      		}
   		</script>
 		
 		<div id="header" class="b5radius">
@@ -101,4 +109,42 @@
 			<div style="clear: both"></div>
 		</form>
 		</div>
+		<div id="delete_window"> 
+		<form method="post" action="/Forum/DeleteOwnProfileServlet">
+    		<img onclick="showDelete('none')" id="close_img" src="images/close.png">
+    		<br>
+    		<p id="del_title">
+    			Вы удаляете профиль. Уверены? Точно?
+    		</p>
+    		<div style="clear: both"></div>
+    		
+    		<input type="submit" value="Удалиться" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
+    		<input type="reset" onclick="showDelete('none')" value="Отмена" class="dialog_del_btn text16 b5radius fleft">
+			<div style="clear: both"></div>
+		</form>
+		<div style="clear: both"></div>
+		</div>
+		
+		<div id="delete_user_window"> 
+		<form method="post" action="/Forum/DeleteUserServlet">
+    		<img onclick="showDelete('none')" id="close_img" src="images/close.png">
+    		<br>
+    		<p id="del_title">
+    			Вы удаляете пользователя. Уверены? Точно?
+    		</p>
+    		<div style="clear: both"></div>
+    		<input type="text" class="invisible" value="${param.id }" name="profileId">
+    		<input type="submit" value="Удалиться" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
+    		<input type="reset" onclick="showDelete('none')" value="Отмена" class="dialog_del_btn text16 b5radius fleft">
+			<div style="clear: both"></div>
+		</form>
+		<div style="clear: both"></div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
  	</div>

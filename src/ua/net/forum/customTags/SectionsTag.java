@@ -49,7 +49,7 @@ public class SectionsTag extends SimpleTagSupport {
 				lastMsgNickname = p.getNickName();
 				lastMsgProfileId = p.getId();
 			}
-			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgNickname, lastMsgProfileId);
+			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgNickname, lastMsgProfileId,section.getProfile().getId(),section.getProfile().getNickName());
 			sectionsForView.add(sectionForView);
 		}
 		

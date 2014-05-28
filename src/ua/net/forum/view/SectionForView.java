@@ -10,9 +10,11 @@ public class SectionForView {
 	private Timestamp lastMsgDate;
 	private String userName;
 	private int userId;
+	private int moderatorId;
+	private String moderatorNickName;
 	
 	public SectionForView(int id, String name, int topicCount, int msgCount,
-			Timestamp date, String userName, int userId) {
+			Timestamp date, String userName, int userId,int moderatorId,String moderatorNickName) {
 		this.id = id;
 		this.name = name;
 		this.topicCount = topicCount;
@@ -20,6 +22,8 @@ public class SectionForView {
 		this.lastMsgDate = date;
 		this.userName = userName;
 		this.userId = userId;
+		this.setModeratorId(moderatorId);
+		this.setModeratorNickName(moderatorNickName);
 	}
 	
 	public int getId() {
@@ -76,5 +80,21 @@ public class SectionForView {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getModeratorNickName() {
+		return moderatorNickName;
+	}
+
+	public void setModeratorNickName(String moderatorNickName) {
+		this.moderatorNickName = moderatorNickName;
+	}
+
+	public int getModeratorId() {
+		return moderatorId;
+	}
+
+	public void setModeratorId(int moderatorId) {
+		this.moderatorId = moderatorId;
 	}
 }

@@ -46,7 +46,7 @@
 					<img src="/Forum/DisplayIcon?id=${user.id }">
 					</td>
 					<td class="section_in_table">
-						<a href="topics.html">${user.nickName }</a>
+						<a href="profile.jsp?id=${user.id }">${user.nickName }</a>
 					</td>
 					<td>${user.msgCount }</td>
 					<td>

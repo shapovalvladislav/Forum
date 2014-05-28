@@ -18,10 +18,13 @@
 	<jsp:include page="/TopicServlet" />
 
 <c:if test="${ not empty sessionScope.loggedProfileId }">
+	<c:if test="${ sessionScope.loggedProfileId == moderatorId || sessionScope.userRole =='admin' 
+	|| sessionScope.canCreateTopic == true }">
 	<div style="clear: both"></div>
 		<div class="add_btn b5radius visible" onclick="newTopic('block')">
 			<p class="text16">Добавить</p>
 		</div>
+	</c:if>
 </c:if>
 	<div style="clear: both"></div>
 

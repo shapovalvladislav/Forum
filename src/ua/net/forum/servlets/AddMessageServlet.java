@@ -71,6 +71,8 @@ public class AddMessageServlet extends HttpServlet {
 		IMessageService messageService = ServiceFactory.DEFAULT.getMessageService();
 		messageService.addEntity(msg);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
+		request.getSession().setAttribute("canCreateTopic",DBQuery.canCreateTopic(profileId));
+	
 		response.sendRedirect(prevPage + "#last");
 }
 

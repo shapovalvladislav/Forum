@@ -78,6 +78,8 @@ public class RegisterServlet extends HttpServlet {
 	    profile.setSex(sex);
 	    profile.setAbout(about);
 	    profile.setIcon(bFile);
+	    profile.setMsgCount(0);
+	    profile.setTopicCount(0);
 	    
 	    User user = new User();
 	    user.setLogin(login);

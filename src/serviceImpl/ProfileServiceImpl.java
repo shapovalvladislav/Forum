@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 import dao.DaoFactory;
 import dao.IMessageDao;
@@ -19,7 +20,7 @@ public class ProfileServiceImpl extends GenericServiceImpl<Profile> implements
 	protected IProfileDao profileDao;
 	
 	@Override
-	public Collection<Profile> findTopProfiles() throws ServiceException {
+	public Collection<Object> findTopProfiles() throws ServiceException {
 		ServiceFactory factory = ServiceFactory.DEFAULT;
 		IProfileService service = factory.getProfileService();
 		return service.findTopProfiles();

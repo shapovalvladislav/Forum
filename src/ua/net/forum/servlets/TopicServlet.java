@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import exceptions.ServiceException;
 import model.Message;
 import model.Profile;
+import model.Section;
 import model.Topic;
+import service.ISectionService;
 import service.ITopicService;
 import service.ServiceFactory;
 import ua.net.forum.db.DBQuery;
@@ -66,6 +68,9 @@ public class TopicServlet extends HttpServlet {
 			TopicForView topicForView = new TopicForView(id, name, msgCount, lastMsgDate, lastMsgProfileNickName, lastMsgProfileId);
 			topicsForView.add(topicForView);
 		}
+		ISectionService sectionService = ServiceFactory.DEFAULT.getSectionService();
+		Section section = sectionService.getEntityById(Integer.parseInt(sectionId));
+		request.setAttribute("moderatorId", section.getProfile().getId());
 		request.setAttribute("topics", topicsForView);
 	}
 

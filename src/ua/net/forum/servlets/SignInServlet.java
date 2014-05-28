@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.ServiceException;
 import model.Profile;
+import model.User;
 import service.IProfileService;
 import service.IUserService;
 import service.ServiceFactory;
@@ -48,6 +50,16 @@ public class SignInServlet extends HttpServlet {
 			Profile p = profileService.findProfileByLogin(login);
 			request.getSession().setAttribute("loggedProfileId", p.getId());
 			request.getSession().setAttribute("login", login);
+			User user = null;
+			try {
+				user = userService.findByLogin(login);
+			} catch (ServiceException e) {
+			}
+			if (user != null)
+			request.getSession().setAttribute("userRole", user.getRoleBean().getName());
+			request.getSession().setAttribute("userId", user.getId());
+			request.getSession().setAttribute("canCreateTopic", DBQuery.canCreateTopic(p.getId()));
+			
 			response.sendRedirect(prevPage);
 		} else {
 			request.getRequestDispatcher("/signInError.jsp").forward(request, response);

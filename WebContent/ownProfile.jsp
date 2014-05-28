@@ -124,8 +124,8 @@
 	    	<input id="bt_reg" type="submit" value="Сохранить изменения" name="save">
 	   </div>
 
-	   <div onclick="showDelete('block')">
-	    	<p id="del_btn">Удалиться(</p>
+	   <div onclick="delOwnProfile('block')">
+	    	<p id="del_btn">Удалить профиль(</p>
 	   </div>
 
 	</form>
@@ -134,40 +134,7 @@
 	<jsp:include page="footer.jsp" />
 
 
-	<div id="wrap">
-		<div id="login_window"> 
-		<form action="post">
-    		<img onclick="showLogin('none')" id="close_img" src="images/close.png">
-    		<p>
-    			Вход
-    		</p>
-    		<div style="clear: both"></div>
-    		<input type="text" placeholder="Логин" name="login" class="login_input">
-    		<input type="password" placeholder="********" name="password" class="login_input">
-    		<input type="submit" value="Войти" id="login_btn" class="text16 b5radius">
-			<div style="clear: both"></div>
-		</form>
-		</div> <!-- login_window -->
-
-	<div id="delete_window"> 
-		<form action="post">
-    		<img onclick="showDelete('none')" id="close_img" src="images/close.png">
-    		<br>
-    		<p id="del_title">
-    			Вы удаляете свой профиль. Уверены? Точно?
-    		</p>
-    		<div style="clear: both"></div>
-    		
-    		<input type="submit" value="Удалиться" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
-    		<input type="reset" onclick="showDelete('none')" value="Отмена" class="dialog_del_btn text16 b5radius fleft">
-			<div style="clear: both"></div>
-		</form>
-		<div style="clear: both"></div>
-	</div>
-
-
-
- 	</div>
+	
 
 </div>
 

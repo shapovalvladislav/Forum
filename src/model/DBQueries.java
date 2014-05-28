@@ -19,4 +19,9 @@ public class DBQueries {
 	public static final String GET_USER_BY_LOGIN_AND_PASSWORD = "getUserByLoginAndPassword";
 	
 	public static final String GET_ROLE_BY_NAME = "getRoleByName";
+	
+	public static final String GET_TOP_PROC = "SELECT * FROM \"getTopUsers\"()";
+	public static final String CAN_CREATE_TOPIC_PROC = "SELECT * FROM \"cancreatetopic\"(?)";
+	public static final String GET_USER_ID_BY_PROFILE_ID_PROC = "SELECT * FROM findUserIdByProfileId(?)";
+	
 }

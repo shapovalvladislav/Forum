@@ -1,6 +1,5 @@
 package ua.net.forum.servlets;
 
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,19 +28,21 @@ import ua.net.forum.view.SectionForView;
 @WebServlet("/SectionServlet")
 public class SectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SectionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SectionServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ServiceFactory factory = ServiceFactory.DEFAULT;
 		ISectionService service = factory.getSectionService();
 		Collection<Section> sections = service.getAllEntites();
@@ -60,16 +61,20 @@ public class SectionServlet extends HttpServlet {
 				lastMsgNickname = p.getNickName();
 				lastMsgProfileId = p.getId();
 			}
-			SectionForView sectionForView = new SectionForView(id, name, topicCount, msgCount, lastMsgDate, lastMsgNickname, lastMsgProfileId);
+			SectionForView sectionForView = new SectionForView(id, name,
+					topicCount, msgCount, lastMsgDate, lastMsgNickname,
+					lastMsgProfileId,section.getProfile().getId(),section.getProfile().getNickName());
 			sectionsForView.add(sectionForView);
 		}
 		request.setAttribute("sections", sectionsForView);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.PersistenceException;
 
@@ -15,6 +16,6 @@ import model.Section;
  */
 public interface IProfileDao extends IGenericDao<Profile> {
 	
-	public Collection<Profile> findTopProfiles() throws PersistenceException;
+	public Collection<Object> findTopProfiles() throws PersistenceException;
 	
 }

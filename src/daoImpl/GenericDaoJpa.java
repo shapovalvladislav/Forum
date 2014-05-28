@@ -333,5 +333,67 @@ public abstract class GenericDaoJpa<T extends DomainSuperClass> implements
 
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected <REZ> REZ executeNativeQuery(String query,
+			boolean singleResult, Object... parameters)
+			throws PersistenceException {
+
+		// Creating entity manager to work with entity
+		EntityManager entityManager = entityManagerFactory
+				.createEntityManager();
+
+		// Begin a new local transaction so that we can persist a new entity
+		entityManager.getTransaction().begin();
+
+		REZ result;
+
+		try {
+
+			Query q;
+			
+			// Creating either named or simple query
+			
+			q = entityManager.createNativeQuery(query);
+			
+
+			// Executing query
+			if (singleResult) {
+				
+				List<?> list = q.getResultList();
+				if (CollectionUtils.isNotEmpty(list)) {
+					result = (REZ) list.get(0);
+				} else {
+					result = null;
+				}
+
+			} else {
+
+				result = (REZ) q.getResultList();
+
+			}
+
+			// Commit the transaction, which will cause the entity to
+			// be stored in the database
+			entityManager.getTransaction().commit();
+
+		} catch (Exception e) {
+
+			// Catching exceptions and rollback of transaction
+			entityManager.getTransaction().rollback();
+
+			// throwing exception further
+			throw new PersistenceException(e);
+
+		} finally {
+
+			// It is always good practice to close the EntityManager so that
+			// resources are conserved.
+			entityManager.close();
+
+		}
+
+		return result;
+	}
 
 }

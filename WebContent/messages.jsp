@@ -77,11 +77,22 @@
 				<p class="ml_10 fleft nick">${ message.date }</p>
 				<div class="fleft msg_content">
 				${message.content }		
-				</div> 
+				</div>
+				
 			</div>
 	
 			
 			<div style="clear: both"></div>
+			<c:if test="${ message.profile.id == sessionScope.loggedProfileId ||
+			sessionScope.userRole == 'admin' || sessionScope.loggedProfileId == moderatorId
+			}">	
+			<form action="/Forum/DeleteMessageServlet" method="post">
+					<input type="submit" value="Удалить">
+					<input type="text" class="invisible" name="messageId" value="${message.id}">
+			</form> 
+			</c:if>
+		
+		
 		</div> <!-- message -->
  
 </c:forEach>

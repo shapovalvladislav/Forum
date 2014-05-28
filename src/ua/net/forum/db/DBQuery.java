@@ -15,6 +15,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import model.DBQueries;
 import model.Message;
 import model.Profile;
 import model.Role;
@@ -41,6 +42,64 @@ public class DBQuery {
 	private static Logger log = LogManager.getLogger(DBQuery.class.getName());
 	@PersistenceContext 
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Forum");
+	
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getTopProfiles() {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		List<?> list = null;
+		try {
+			Query query = em.createNativeQuery(DBQueries.GET_TOP_PROC);
+			list = query.getResultList();
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return (Collection<Object>)list;
+	}
+
+	public static boolean canCreateTopic(int profileId) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		List<?> list = null;
+		boolean result = false;
+		try {
+			Query query = em.createNativeQuery(DBQueries.CAN_CREATE_TOPIC_PROC);
+			query.setParameter(1, profileId);
+			list = query.getResultList();
+			result = (Boolean) list.get(0);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
+	
+	public static int getUserIdByProfileId(int profileId) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		List<?> list = null;
+		int result = 0;
+		try {
+			Query query = em.createNativeQuery(DBQueries.GET_USER_ID_BY_PROFILE_ID_PROC);
+			query.setParameter(1, profileId);
+			list = query.getResultList();
+			result = (Integer)list.get(0);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.error(e);
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
 	
 	
 	public static Profile getProfileById(int id) {

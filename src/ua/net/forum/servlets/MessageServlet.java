@@ -75,6 +75,7 @@ public class MessageServlet extends HttpServlet {
 		
 		for (String s : links)
 			System.out.println(s);
+		request.setAttribute("moderatorId", topic.getSectionBean().getProfile().getId());
 		request.setAttribute("pageLinks", links);
 		request.setAttribute("messages", messagesFromPage);
 		request.setAttribute("pageCount", pageCount);

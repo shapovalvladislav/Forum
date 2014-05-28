@@ -29,10 +29,5 @@
 			
 			</c:if>
 		</ul>
-		<div id="search">
-			<form>
-				<img src="images/search.png">
-				<input type="text" name="search" placeholder="Поиск..">
-			</form>
-		</div>
+	
 	</div>

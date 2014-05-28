@@ -69,11 +69,37 @@
 		<p>Количество сообщений: ${profile.msgCount }</p>
 	</div>
 
-
-	<form action="" class="invisible">
-		<input type="submit" value="Удалить пользователя">
-	</form>
-
+	<c:if test="${ not empty sessionScope.loggedProfileId }">
+		<c:if test="${ sessionScope.userRole == 'admin' }">
+		<form method="post" action="/Forum/DeleteUserServlet">
+    		<input type="text" class="invisible" value="${param.id }" name="profileId">
+    		<input type="submit" value="Удалить пользователя" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
+    	<div style="clear: both"></div>
+		</form>
+		</c:if>
+	</c:if>
+	
+	<c:if test="${ not empty sessionScope.loggedProfileId }">
+		<c:if test="${ sessionScope.userRole == 'admin' }">
+		<form method="post" action="/Forum/SetUserRoleServlet">
+    		<input type="text" class="invisible" value="${param.id}" name="profileId">
+    		<input type="text" class="invisible" value="1" name="userRole">
+    		<input type="submit" value="Назначить админом" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
+    	<div style="clear: both"></div>
+		</form>
+		<form method="post" action="/Forum/SetModeratorServlet">
+    		<input type="text" class="invisible" value="${param.id}" name="profileId">
+ 			<p>Разделы:</p>
+ 			<select name="sectionId">
+ 			<c:forEach var="section" items="${sections}">
+  				<option value="${section.id}">${section.name}</option>
+			</c:forEach>
+    		</select>
+    		<input type="submit" value="Назначить модератором раздела" id="yes_btn" class="dialog_del_btn fleft text16 b5radius">
+    	<div style="clear: both"></div>
+		</form>
+		</c:if>
+	</c:if>
 
 </div> <!--content-->
 

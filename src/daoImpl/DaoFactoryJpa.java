@@ -12,7 +12,6 @@ import dao.IMessageDao;
 import dao.IProfileDao;
 import dao.IRoleDao;
 import dao.ISectionDao;
-import dao.ITestDao;
 import dao.ITopicDao;
 import dao.IUserDao;
 
@@ -106,10 +105,5 @@ public class DaoFactoryJpa extends DaoFactory {
 		return new ForbiddenWordDaoJpa(emf);
 	}
 
-	@Override
-	public ITestDao getTestDao() {
-		// TODO Auto-generated method stub
-		return new TestDaoJpa(emf);
-	}
 
 }
