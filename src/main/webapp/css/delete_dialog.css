@@ -1,0 +1,50 @@
+#del_btn {
+	background-color: #CD5C5C;
+	display: block;
+	cursor: pointer;
+	border: solid 1px #000;
+	width: 80px;
+}
+
+#delete_window{
+	width: 350px;
+	margin: 228px auto;
+	margin-bottom: 500px;
+	display: none;
+	background-color: #DCDCDC;
+	border-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding-bottom: 30px;
+
+	text-align: center;
+}
+
+.fleft {
+    float: left;
+}
+
+#yes_btn {
+	margin-left: 65px;
+	margin-right: 10px;
+}
+
+#del_title {
+	margin-top: 20px;
+}
+
+.dialog_del_btn {
+	background-image: url(../images/header_button.png);
+	width: 104px;
+	height: 26px;
+	border: none;
+	margin: 0 auto;
+	text-align: center;
+	cursor: pointer;
+	display: block;
+	margin-top: 20px;
+ }
+
+.dialog_del_btn:hover {
+	background-image: url(../images/header_button_hover.png);
+}
